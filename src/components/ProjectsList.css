@@ -1,0 +1,128 @@
+.projects-panel {
+  width: 400px;
+  background: var(--bot-bubble);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.projects-header {
+  padding: 10px 16px;
+  background: var(--bot-bubble);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.projects-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 10px 0 16px 0;
+  color: var(--text-primary);
+}
+
+.projects-search {
+  margin-bottom: 8px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  background: var(--app-bg);
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.projects-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.projects-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.projects-list::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary);
+  border-radius: 3px;
+}
+
+.project-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.project-item:hover {
+  background: var(--app-bg);
+}
+
+.project-icon {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  border-radius: 50%;
+  background: var(--primary-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.project-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.project-name {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 4px 0;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-description {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-action {
+  font-size: 20px;
+  color: var(--text-tertiary);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.project-item:hover .project-action {
+  opacity: 1;
+}
+
+/* Mobile - hide projects panel, show as modal or bottom sheet */
+@media (max-width: 1024px) {
+  .projects-panel {
+    width: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-panel {
+    display: none; /* Can be toggled with button */
+  }
+}
