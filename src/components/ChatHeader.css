@@ -9,6 +9,27 @@
   box-shadow: 0 1px 2px var(--shadow-light);
 }
 
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  margin-right: 8px;
+}
+
+.mobile-menu-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
 [data-theme="light"] .chat-header {
   color: #FFFFFF;
 }
@@ -33,6 +54,7 @@
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.2s;
+  position: relative;
 }
 
 .avatar:hover {
@@ -48,6 +70,36 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.avatar-wrapper {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.online-indicator {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 12px;
+  height: 12px;
+  background: #25D366;
+  border: 2px solid var(--header-bg);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+
+
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(37, 211, 102, 0);
+  }
 }
 
 .header-info {
@@ -84,7 +136,8 @@
   align-items: center;
 }
 
-.icon-button {
+.icon-button,
+.icon {
   background: none;
   border: none;
   color: inherit;
@@ -101,12 +154,14 @@
   opacity: 0.9;
 }
 
-.icon-button:hover {
+.icon-button:hover,
+.icon:hover {
   background: rgba(255, 255, 255, 0.1);
   opacity: 1;
 }
 
-[data-theme="dark"] .icon-button:hover {
+[data-theme="dark"] .icon-button:hover,
+[data-theme="dark"] .icon:hover {
   background: rgba(255, 255, 255, 0.05);
 }
 
@@ -150,6 +205,11 @@
     font-size: 18px;
   }
 
+  .avatar::after {
+    width: 10px;
+    height: 10px;
+  }
+
   .header-name {
     font-size: 15px;
   }
@@ -158,7 +218,7 @@
     font-size: 12px;
   }
 
-  .icon-button, .theme-toggle {
+  .icon-button, .theme-toggle, .icon {
     width: 36px;
     height: 36px;
     font-size: 20px;
@@ -169,25 +229,3 @@
   }
 }
 
-.icon {
-  background: none;        /* ❌ no background */
-  border: none;
-  padding: 6px;            /* small clickable area */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-/* Subtle hover (WhatsApp style) */
-.icon:hover {
-  color: var(--text-primary);
-}
-
-/* Optional: remove focus outline but keep accessibility */
-.icon:focus-visible {
-  outline: 2px solid rgba(0, 168, 132, 0.4);
-  border-radius: 50%;
-}

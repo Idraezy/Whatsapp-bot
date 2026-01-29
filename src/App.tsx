@@ -3,6 +3,8 @@ import './App.css';
 import Sidebar from './components/Sidebar';
 import ProjectsList, { Project } from './components/ProjectsList';
 import ContactInfo, { ContactLink } from './components/ContactInfo';
+import Collaborations, { Collaboration } from './components/Collaboration';
+import Skills, { Skill } from './components/Skills';
 import ChatHeader from './components/ChatHeader';
 import MessageBubble from './components/MessageBubble';
 import TypingIndicator from './components/TypingIndicator';
@@ -23,7 +25,8 @@ function App() {
   const [invalidAttempts, setInvalidAttempts] = useState<number>(0);
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const [activeTab, setActiveTab] = useState<'projects' | 'contact'>('projects');
+  const [activeTab, setActiveTab] = useState<'projects' | 'contact' | 'collaborations' | 'skills'>('projects');
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
 
   // Projects data - ADD YOUR PROJECTS HERE
   const projects: Project[] = [
@@ -102,6 +105,63 @@ function App() {
       icon: '🌐',
     },
   ];
+
+  // Collaborations/Experience data - ADD YOUR EXPERIENCE HERE
+  const collaborations: Collaboration[] = [
+    {
+      id: '1',
+      company: 'Tech Startup Inc',
+      role: 'Frontend Developer',
+      period: '2023 - Present',
+      description: 'Building scalable web applications with React and TypeScript',
+      logo: '🚀',
+    },
+    {
+      id: '2',
+      company: 'Web3 Foundation',
+      role: 'Web3 Ambassador',
+      period: '2022 - Present',
+      description: 'Promoting blockchain technology and decentralized applications',
+      logo: '⛓️',
+    },
+    {
+      id: '3',
+      company: 'Design Agency',
+      role: 'UI/UX Designer',
+      period: '2021 - 2023',
+      description: 'Created user-centered designs for mobile and web applications',
+      logo: '🎨',
+    },
+    {
+      id: '4',
+      company: 'Freelance',
+      role: 'Full Stack Developer',
+      period: '2020 - 2021',
+      description: 'Delivered custom solutions for various clients worldwide',
+      logo: '💼',
+    },
+  ];
+
+  // Skills data - ADD YOUR SKILLS HERE
+  const skills: Skill[] = [
+    // Frontend
+    { id: '1', name: 'React.js', category: 'Frontend', level: 95, icon: '⚛️' },
+    { id: '2', name: 'TypeScript', category: 'Frontend', level: 90, icon: '📘' },
+    { id: '3', name: 'Next.js', category: 'Frontend', level: 85, icon: '▲' },
+    { id: '4', name: 'Tailwind CSS', category: 'Frontend', level: 90, icon: '🎨' },
+    { id: '5', name: 'JavaScript', category: 'Frontend', level: 95, icon: '💛' },
+    { id: '6', name: 'HTML/CSS', category: 'Frontend', level: 98, icon: '🌐' },
+    
+    // Backend
+    { id: '7', name: 'Node.js', category: 'Backend', level: 80, icon: '🟢' },
+    { id: '8', name: 'Express.js', category: 'Backend', level: 75, icon: '🚂' },
+    { id: '9', name: 'MongoDB', category: 'Backend', level: 70, icon: '🍃' },
+    
+    // Tools & Others
+    { id: '10', name: 'Git/GitHub', category: 'Tools', level: 90, icon: '🔀' },
+    { id: '11', name: 'Figma', category: 'Design', level: 85, icon: '🎭' },
+    { id: '12', name: 'Smart Contracts', category: 'Web3', level: 65, icon: '📜' },
+  ];
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -178,6 +238,18 @@ function App() {
         handleBotNameInput(userInput);
         break;
 
+      case STATES.INTRO_1:
+        handleIntro1();
+        break;
+
+      case STATES.INTRO_2:
+        handleIntro2();
+        break;
+
+      case STATES.INTRO_3:
+        handleIntro3();
+        break;
+
       case STATES.ASK_CHOICE:
         handleChoiceInput(userInput);
         break;
@@ -196,8 +268,13 @@ function App() {
   // Handle name input state
   const handleNameInput = (name: string): void => {
     setUserName(name.trim());
-    addBotMessage('Please upload your image 📸', 1500);
-    setCurrentState(STATES.ASK_IMAGE);
+    const firstMessage = `Awesome 😎\n\nWhat would you like to know about me?`;
+    addBotMessage(firstMessage, 1000);
+    // Wait a bit then ask for image
+    setTimeout(() => {
+      addBotMessage('But first, please upload your image 📸', 1500);
+      setCurrentState(STATES.ASK_IMAGE);
+    }, 2500);
   };
 
   // Handle image upload
@@ -207,18 +284,40 @@ function App() {
       const base64 = reader.result as string;
       setUserImage(base64);
       localStorage.setItem('user-image', base64);
-      addBotMessage("Nice 👍 What would you love to call me?", 1200);
-      setCurrentState(STATES.ASK_BOT_NAME);
+      
+      // Add a small delay before asking for bot name to ensure state updates
+      setTimeout(() => {
+        addBotMessage("Nice 👍 What would you love to call me?", 800);
+        setCurrentState(STATES.ASK_BOT_NAME);
+      }, 100);
     };
     reader.readAsDataURL(file);
   };
 
-  // Handle bot name
+  // Handle bot name input
   const handleBotNameInput = (name: string): void => {
     setBotName(name.trim());
     localStorage.setItem('bot-name', name.trim());
-    const responseText = `Awesome 😎 I'm now ${name.trim()}, your AI.\n\nWhat would you like to see?\n\nA️⃣ About Me\nB️⃣ Projects\nC️⃣ Contact Information\n\nPlease type A, B, or C.`;
-    addBotMessage(responseText, 1500);
+    addBotMessage(`Great! I'm now ${name.trim()}, your AI. 🤖`, 1000);
+    // Start introduction flow after a delay
+    setTimeout(() => {
+      const intro1 = `Okay... Let me introduce myself briefly...\n\nMy Name still Remains...\n\nIdara Etim.\n\nI'm a Frontend Developer skilled in HTML, CSS, JavaScript, React.js, TypeScript, Tailwind CSS, and Next.js, with a strong passion for building intuitive, user-focused solutions.`;
+      addBotMessage(intro1, 1500);
+      setCurrentState(STATES.INTRO_2);
+    }, 2500);
+  };
+
+  // Handle second interaction - send introduction part 2
+  const handleIntro2 = (): void => {
+    const intro2 = `Currently expanding expertise in backend development and smart contract development, with additional strengths in graphic design and active involvement as a Web3 Ambassador.`;
+    addBotMessage(intro2, 2000);
+    setCurrentState(STATES.INTRO_3);
+  };
+
+  // Handle third interaction - show menu
+  const handleIntro3 = (): void => {
+    const menuMessage = `Do you want to know\n\nA️⃣ About Me or\nB️⃣ Projects or see my\nC️⃣ Contact Information\n\nPlease type A, B, or C.`;
+    addBotMessage(menuMessage, 1500);
     setCurrentState(STATES.ASK_CHOICE);
     setInvalidAttempts(0);
   };
@@ -264,7 +363,7 @@ function App() {
 
   // Show About Me section
   const handleAboutChoice = (): void => {
-    const aboutText = `📖 About Me\n\nI'm a passionate Full Stack Developer with expertise in:\n• React & Modern JavaScript\n• Node.js & Express\n• UI/UX Design\n• Cloud Technologies\n\nI love building user-friendly applications that solve real-world problems!\n\n---\n\nWant to see more?\nA️⃣ About Me\nB️⃣ Projects\nC️⃣ Contact Information`;
+    const aboutText = `📖 About Me\n\nI'm a passionate Full Stack Developer with expertise in:\n• React & Modern JavaScript\n• Node.js & Express\n• UI/UX Design\n• Cloud Technologies\n\nI love building user-friendly applications that solve real-world problems!\n\n---\n\nWhat else would you like to know?\nA️⃣ About Me\nB️⃣ Projects\nC️⃣ Contact Information`;
     
     addBotMessage(aboutText, 1200);
     setCurrentState(STATES.SHOW_ABOUT);
@@ -273,7 +372,7 @@ function App() {
 
   // Show Projects section
   const handleProjectsChoice = (): void => {
-    const projectsText = `💼 My Projects\n\n1. E-Commerce Platform\n   Built with React, Node.js, MongoDB\n   • Real-time inventory management\n   • Payment integration\n\n2. Task Management App\n   Built with React, Firebase\n   • Real-time collaboration\n   • Drag-and-drop interface\n\n3. Weather Dashboard\n   Built with React, API Integration\n   • Live weather data\n   • 7-day forecast\n\n---\n\nWhat else would you like to know?\nA️⃣ About Me\nB️⃣ Projects\nC️⃣ Contact Information`;
+    const projectsText = `💼 My Projects\n\nCheck out the projects list in the middle panel! 👈\nClick on any project to learn more about it.\n\nYou can also view:\n\n1. E-Commerce Platform\n   Built with React, Node.js, MongoDB\n\n2. Task Management App\n   Built with React, Firebase\n\n3. Weather Dashboard\n   Built with React, API Integration\n\n---\n\nWhat else would you like to know?\nA️⃣ About Me\nB️⃣ Projects\nC️⃣ Contact Information`;
     
     addBotMessage(projectsText, 1200);
     setCurrentState(STATES.SHOW_PROJECTS);
@@ -282,7 +381,7 @@ function App() {
 
   // Show Contact Information section
   const handleContactChoice = (): void => {
-    const contactText = `📞 Contact Information\n\n📧 Email: developer@example.com\n🔗 LinkedIn: linkedin.com/in/yourprofile\n💻 GitHub: github.com/yourprofile\n🌐 Portfolio: www.yourportfolio.com\n📱 Phone: +1 (555) 123-4567\n\n---\n\nFeel free to reach out!\n\nWhat else would you like to explore?\nA️⃣ About Me\nB️⃣ Projects\nC️⃣ Contact Information`;
+    const contactText = `📞 Contact Information\n\nYou can find all my social links in the middle panel! 👈\nClick on any platform to connect with me.\n\n📧 Email: developer@example.com\n🔗 LinkedIn: linkedin.com/in/yourprofile\n💻 GitHub: github.com/yourprofile\n🌐 Portfolio: www.yourportfolio.com\n📱 Phone: +1 (555) 123-4567\n\n---\n\nFeel free to reach out!\n\nWhat else would you like to explore?\nA️⃣ About Me\nB️⃣ Projects\nC️⃣ Contact Information`;
     
     addBotMessage(contactText, 1200);
     setCurrentState(STATES.SHOW_CONTACT);
@@ -311,13 +410,26 @@ function App() {
     <div className="app-container">
       <div className="whatsapp-layout">
         {/* Left Sidebar - Navigation Icons */}
-        <Sidebar activeTab={activeTab} onTabChange={setActiveTab} />
+        <Sidebar 
+          activeTab={activeTab} 
+          onTabChange={setActiveTab}
+          userImage={userImage}
+          isOpen={isSidebarOpen}
+          onClose={() => setIsSidebarOpen(false)}
+        />
 
-        {/* Middle Panel - Projects or Contact List */}
-        {activeTab === 'projects' ? (
+        {/* Middle Panel - Projects, Contact, Collaborations, or Skills */}
+        {activeTab === 'projects' && (
           <ProjectsList projects={projects} onProjectClick={handleProjectClick} />
-        ) : (
+        )}
+        {activeTab === 'contact' && (
           <ContactInfo contacts={contactLinks} />
+        )}
+        {activeTab === 'collaborations' && (
+          <Collaborations collaborations={collaborations} />
+        )}
+        {activeTab === 'skills' && (
+          <Skills skills={skills} />
         )}
 
         {/* Right Panel - Chat Section */}
@@ -327,6 +439,7 @@ function App() {
             userImage={userImage}
             theme={theme}
             onToggleTheme={toggleTheme}
+            onMenuClick={() => setIsSidebarOpen(true)}
           />
 
           <div className="messages-container">

@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import { Mic, Paperclip, SmilePlus } from 'lucide-react';
 import './ChatInput.css';
 
 interface ChatInputProps {
@@ -7,61 +8,54 @@ interface ChatInputProps {
   disabled?: boolean;
 }
 
-const ChatInput: React.FC<ChatInputProps> = ({ 
-  onSendMessage, 
+const ChatInput: React.FC<ChatInputProps> = ({
+  onSendMessage,
   onImageUpload,
-  disabled = false 
+  disabled = false,
 }) => {
-  const [inputValue, setInputValue] = useState<string>('');
+  const [inputValue, setInputValue] = useState('');
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  // Handle send button click
-  const handleSend = (): void => {
+  const handleSend = () => {
     if (inputValue.trim() && !disabled) {
       onSendMessage(inputValue);
-      setInputValue(''); // Clear input after sending
+      setInputValue('');
     }
   };
 
-  // Handle Enter key press
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSend();
     }
   };
 
-  // Handle attachment click
-  const handleAttachmentClick = (): void => {
+  const handleAttachmentClick = () => {
     fileInputRef.current?.click();
   };
 
-  // Handle file change
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0] && onImageUpload) {
       onImageUpload(e.target.files[0]);
-      e.target.value = ''; // Reset input
+      e.target.value = ''; // reset input
     }
   };
 
   return (
     <div className="chat-input-container">
       <div className="input-icons-left">
-        <button 
-          className="emoji-button" 
-          aria-label="Emoji"
-          disabled={disabled}
-        >
-          😊
+        <button className="emoji-button" aria-label="Emoji">
+          <SmilePlus size={20} color='#FFC638'/>
         </button>
+
         <button
           className="attachment-button"
           aria-label="Attach"
           onClick={handleAttachmentClick}
-          disabled={disabled}
         >
-          📎
+          <Paperclip size={20} />
         </button>
+
         {/* HIDDEN FILE INPUT */}
         <input
           ref={fileInputRef}
@@ -71,7 +65,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
           onChange={handleFileChange}
         />
       </div>
-      
+
       <input
         type="text"
         className="chat-input"
@@ -83,20 +77,12 @@ const ChatInput: React.FC<ChatInputProps> = ({
       />
 
       {inputValue.trim() && !disabled ? (
-        <button 
-          className="send-button"
-          onClick={handleSend}
-          aria-label="Send message"
-        >
+        <button className="send-button" onClick={handleSend}>
           ➤
         </button>
       ) : (
-        <button 
-          className="mic-button"
-          aria-label="Voice message"
-          disabled={disabled}
-        >
-          🎤
+        <button className="mic-button" disabled={disabled}>
+          <Mic size={20} />
         </button>
       )}
     </div>
