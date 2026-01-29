@@ -6,7 +6,7 @@ export interface Project {
   name: string;
   description: string;
   link: string;
-  icon: string;
+  icon: string; // Now it's an image URL
 }
 
 interface ProjectsListProps {
@@ -36,7 +36,7 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ projects, onProjectClick })
             onClick={() => onProjectClick(project)}
           >
             <div className="project-icon">
-              <span>{project.icon}</span>
+              <img src={project.icon} alt={project.name} />
             </div>
             <div className="project-info">
               <h3 className="project-name">{project.name}</h3>

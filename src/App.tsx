@@ -11,6 +11,17 @@ import TypingIndicator from './components/TypingIndicator';
 import ChatInput from './components/ChatInput';
 import { Message, STATES, StateType } from './types';
 
+
+// Import project images
+import logo from './assets/logo.png';
+import logoo from './assets/logoo.jpeg';
+import logooo from './assets/logooo.png';
+import logoooo from './assets/logoooo.jpeg';
+import logooooo from './assets/logooooo.jpeg';
+import nft from './assets/nft.png';
+import prof from './assets/prof.jpg';
+import cola from './assets/cola.png';
+
 function App() {
   // State management
   const [messages, setMessages] = useState<Message[]>([]);
@@ -28,139 +39,189 @@ function App() {
   const [activeTab, setActiveTab] = useState<'projects' | 'contact' | 'collaborations' | 'skills'>('projects');
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
 
-  // Projects data - ADD YOUR PROJECTS HERE
+  // Projects data - Using imported images
   const projects: Project[] = [
     {
       id: '1',
-      name: 'WhatsApp Portfolio Bot',
-      description: 'Interactive chat bot built with React & TypeScript',
-      link: 'https://github.com/yourusername/whatsapp-bot',
-      icon: '💬',
+      name: "E-Commerce Platform",
+      description:
+        "A full-featured e-commerce platform with cart functionality, payment integration, and admin dashboard built with React, TypeScript, Tailwind CSS, Framer Motion, and designed in Figma.",
+      link: "https://dali-m2rk.vercel.app/",
+      icon: logo, // Using image
     },
     {
       id: '2',
-      name: 'E-Commerce Platform',
-      description: 'Full-stack online shopping platform',
-      link: 'https://github.com/yourusername/ecommerce',
-      icon: '🛒',
+      name: "ATS Pro – Resume & ATS Checker",
+      description:
+        "A frontend application that analyzes resumes against job descriptions and provides intelligent ATS-based suggestions using React, TypeScript, Tailwind CSS, Framer Motion, and LocalStorage.",
+      link: "https://at-sify.vercel.app/",
+      icon: logoo, // Using image
     },
     {
       id: '3',
-      name: 'Task Manager App',
-      description: 'Productivity app with real-time sync',
-      link: 'https://github.com/yourusername/task-manager',
-      icon: '✅',
+      name: "Landing Page Generator",
+      description:
+        "An AI-powered landing page generator with real-time preview and customizable themes built using React, TypeScript, Tailwind CSS, Framer Motion, and Figma.",
+      link: "https://landing-page-generator-taupe.vercel.app/",
+      icon: logooo, // Using image
     },
     {
       id: '4',
-      name: 'Weather Dashboard',
-      description: 'Beautiful weather forecast application',
-      link: 'https://github.com/yourusername/weather-app',
-      icon: '🌤️',
+      name: "Smart Invoice",
+      description:
+        "A web application for creating, managing, and exporting professional invoices, built with Next.js, React, Tailwind CSS, and JavaScript.",
+      link: "https://smart-invoice-eta.vercel.app/",
+      icon: logoooo, // Using image
     },
     {
       id: '5',
-      name: 'Portfolio Website',
-      description: 'Personal portfolio with modern design',
-      link: 'https://yourportfolio.com',
-      icon: '💼',
+      name: "ClientPilot",
+      description:
+        "A lightweight client management dashboard for freelancers and small businesses to track clients, statuses, and notes in one place using React, TypeScript, Tailwind CSS, and Framer Motion.",
+      link: "https://client-pilot-mini-app.vercel.app/",
+      icon: logooooo, // Using image
+    },
+    {
+      id: '6',
+      name: "Portfolio Website",
+      description: "Personal portfolio with modern design",
+      link: "https://idara-etim-portfolio.vercel.app/",
+      icon: prof, // Using image
+    },
+    {
+      id: '7',
+      name: "NFT Marketplace",
+      description:
+        "A decentralized marketplace for trading NFTs with wallet connectivity and smart contract integration built using React, TypeScript, Tailwind CSS, Solidity, Framer Motion, and designed in Figma.",
+      link: "https://nft-marketplace-22.vercel.app/",
+      icon: nft, // Using image
     },
   ];
 
-  // Contact/Social links - ADD YOUR LINKS HERE
+  // Contact/Social links - Using Lucide icon names
   const contactLinks: ContactLink[] = [
-    {
-      id: '1',
-      platform: 'GitHub',
-      username: '@yourusername',
-      url: 'https://github.com/yourusername',
-      icon: '🐙',
-    },
-    {
-      id: '2',
-      platform: 'LinkedIn',
-      username: 'Your Name',
-      url: 'https://linkedin.com/in/yourprofile',
-      icon: '💼',
-    },
-    {
-      id: '3',
-      platform: 'Twitter',
-      username: '@yourhandle',
-      url: 'https://twitter.com/yourhandle',
-      icon: '🐦',
-    },
-    {
-      id: '4',
-      platform: 'Email',
-      username: 'your.email@example.com',
-      url: 'mailto:your.email@example.com',
-      icon: '✉️',
-    },
-    {
-      id: '5',
-      platform: 'Portfolio',
-      username: 'yourportfolio.com',
-      url: 'https://yourportfolio.com',
-      icon: '🌐',
-    },
-  ];
+  {
+    id: '1',
+    platform: 'GitHub',
+    username: '@Idraezy',
+    url: 'https://github.com/Idraezy',
+    icon: 'Github',
+    bgColor: '#000409', // GitHub black
+  },
+  {
+    id: '2',
+    platform: 'LinkedIn',
+    username: 'Idara Etim',
+    url: 'https://www.linkedin.com/in/etimidaraubong',
+    icon: 'Linkedin',
+    bgColor: '#0077B5', // LinkedIn blue
+  },
+  {
+    id: '3',
+    platform: 'Twitter (X)',
+    username: '@Idara_etimm',
+    url: 'https://twitter.com/Idara_etimm',
+    icon: 'Twitter',
+    bgColor: '#1DA1F2', // Twitter blue
+  },
+  {
+    id: '4',
+    platform: 'Facebook',
+    username: 'Idara Etim',
+    url: 'https://facebook.com/idaraetimm',
+    icon: 'Facebook',
+    bgColor: '#1877F2', // Facebook blue
+  },
+  {
+    id: '5',
+    platform: 'Instagram',
+    username: '@idaraetimm',
+    url: 'https://instagram.com/idaraetimm',
+    icon: 'Instagram',
+    bgColor: 'linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)', // Instagram gradient
+  },
+  {
+    id: '6',
+    platform: 'TikTok',
+    username: '@idara_etim',
+    url: 'https://tiktok.com/@idara_etim',
+    icon: 'Music',
+    bgColor: '#000000', // TikTok black (can add neon effect later)
+  },
+  {
+    id: '7',
+    platform: 'WhatsApp',
+    username: 'Chat on WhatsApp',
+    url: 'https://wa.me/2347045256955',
+    icon: 'MessageCirclePlus',
+    bgColor: '#25D366', // WhatsApp green'
+  },
+  {
+    id: '8',
+    platform: 'Email',
+    username: 'idraezynoks@gmail.com',
+    url: 'mailto:idraezynoks@gmail.com',
+    icon: 'Mail',
+    bgColor: '#D44638', // Gmail red
+  },
+];
 
-  // Collaborations/Experience data - ADD YOUR EXPERIENCE HERE
+
+  // Collaborations/Experience data - Using Lucide icon names
   const collaborations: Collaboration[] = [
     {
       id: '1',
-      company: 'Tech Startup Inc',
+      company: 'Chaindustry',
       role: 'Frontend Developer',
       period: '2023 - Present',
-      description: 'Building scalable web applications with React and TypeScript',
-      logo: '🚀',
+      description: 'Worked on real-world frontend projects in a collaborative development environment.',
+      logo: 'Rocket', // Lucide icon
     },
     {
       id: '2',
-      company: 'Web3 Foundation',
-      role: 'Web3 Ambassador',
+      company: 'HNG',
+      role: 'Frontend Developer (Internship)',
       period: '2022 - Present',
-      description: 'Promoting blockchain technology and decentralized applications',
-      logo: '⛓️',
+      description: 'Participated in an intensive internship focused on building production-ready frontend applications.',
+      logo: 'Link', // Lucide icon
     },
     {
       id: '3',
-      company: 'Design Agency',
-      role: 'UI/UX Designer',
-      period: '2021 - 2023',
-      description: 'Created user-centered designs for mobile and web applications',
-      logo: '🎨',
+      company: 'FlexiSAF',
+      role: 'Senior Frontend Developer',
+      period: '2025 - Present',
+      description: 'Building modern, responsive, and animated web interfaces using React.js, TypeScript, Tailwind CSS, and Framer Motion with strong focus on UX and performance.',
+      logo: 'Palette', // Lucide icon
     },
     {
       id: '4',
-      company: 'Freelance',
+      company: 'Dali Wears',
       role: 'Full Stack Developer',
-      period: '2020 - 2021',
-      description: 'Delivered custom solutions for various clients worldwide',
-      logo: '💼',
+      period: '2024 - Present',
+      description: 'Building modern, responsive, and animated web interfaces using React.js, TypeScript, Tailwind CSS, and Framer Motion with strong focus on UX and performance.',
+      logo: 'Briefcase', // Lucide icon
     },
   ];
 
-  // Skills data - ADD YOUR SKILLS HERE
+  // Skills data - Using Lucide icon names
   const skills: Skill[] = [
     // Frontend
-    { id: '1', name: 'React.js', category: 'Frontend', level: 95, icon: '⚛️' },
-    { id: '2', name: 'TypeScript', category: 'Frontend', level: 90, icon: '📘' },
-    { id: '3', name: 'Next.js', category: 'Frontend', level: 85, icon: '▲' },
-    { id: '4', name: 'Tailwind CSS', category: 'Frontend', level: 90, icon: '🎨' },
-    { id: '5', name: 'JavaScript', category: 'Frontend', level: 95, icon: '💛' },
-    { id: '6', name: 'HTML/CSS', category: 'Frontend', level: 98, icon: '🌐' },
+    { id: '1', name: 'React.js', category: 'Frontend', level: 95, icon: 'Component' },
+    { id: '2', name: 'TypeScript', category: 'Frontend', level: 90, icon: 'FileCode' },
+    { id: '3', name: 'Next.js', category: 'Frontend', level: 85, icon: 'Triangle' },
+    { id: '4', name: 'Tailwind CSS', category: 'Frontend', level: 90, icon: 'Paintbrush' },
+    { id: '5', name: 'JavaScript', category: 'Frontend', level: 95, icon: 'Code' },
+    { id: '6', name: 'HTML/CSS', category: 'Frontend', level: 98, icon: 'Globe' },
     
     // Backend
-    { id: '7', name: 'Node.js', category: 'Backend', level: 80, icon: '🟢' },
-    { id: '8', name: 'Express.js', category: 'Backend', level: 75, icon: '🚂' },
-    { id: '9', name: 'MongoDB', category: 'Backend', level: 70, icon: '🍃' },
+    { id: '7', name: 'Node.js', category: 'Backend', level: 80, icon: 'Server' },
+    { id: '8', name: 'Express.js', category: 'Backend', level: 75, icon: 'Zap' },
+    { id: '9', name: 'MongoDB', category: 'Backend', level: 70, icon: 'Database' },
     
     // Tools & Others
-    { id: '10', name: 'Git/GitHub', category: 'Tools', level: 90, icon: '🔀' },
-    { id: '11', name: 'Figma', category: 'Design', level: 85, icon: '🎭' },
-    { id: '12', name: 'Smart Contracts', category: 'Web3', level: 65, icon: '📜' },
+    { id: '10', name: 'Git/GitHub', category: 'Tools', level: 90, icon: 'GitBranch' },
+    { id: '11', name: 'Figma', category: 'Design', level: 85, icon: 'Figma' },
+    { id: '12', name: 'Smart Contracts', category: 'Web3', level: 65, icon: 'FileText' },
   ];
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -307,6 +368,11 @@ function App() {
     }, 2500);
   };
 
+  // Handle first interaction - triggers intro2
+  const handleIntro1 = (): void => {
+    handleIntro2();
+  };
+
   // Handle second interaction - send introduction part 2
   const handleIntro2 = (): void => {
     const intro2 = `Currently expanding expertise in backend development and smart contract development, with additional strengths in graphic design and active involvement as a Web3 Ambassador.`;
@@ -381,7 +447,7 @@ function App() {
 
   // Show Contact Information section
   const handleContactChoice = (): void => {
-    const contactText = `📞 Contact Information\n\nYou can find all my social links in the middle panel! 👈\nClick on any platform to connect with me.\n\n📧 Email: developer@example.com\n🔗 LinkedIn: linkedin.com/in/yourprofile\n💻 GitHub: github.com/yourprofile\n🌐 Portfolio: www.yourportfolio.com\n📱 Phone: +1 (555) 123-4567\n\n---\n\nFeel free to reach out!\n\nWhat else would you like to explore?\nA️⃣ About Me\nB️⃣ Projects\nC️⃣ Contact Information`;
+    const contactText = `📞 Contact Information\n\nYou can find all my social links in the middle panel! 👈\nClick on any platform to connect with me.\n\n📧 Email: idraezynoks@gmail.com\n🔗 LinkedIn: linkedin.com/in/etimidaraubong\n💻 GitHub: github.com/Idraezy\n🌐 Portfolio: idara-etim-portfolio.vercel.app\n📱 WhatsApp: +234 704 525 6955\n\n---\n\nFeel free to reach out!\n\nWhat else would you like to explore?\nA️⃣ About Me\nB️⃣ Projects\nC️⃣ Contact Information`;
     
     addBotMessage(contactText, 1200);
     setCurrentState(STATES.SHOW_CONTACT);
