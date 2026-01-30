@@ -89,10 +89,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         <div className="sidebar-footer">
-          {/* Dash icon separator */}
-          <div className="sidebar-divider">
-            <Minus size={20} strokeWidth={2} />
-          </div>
+
 
           {/* Writeup section */}
           <button
@@ -102,6 +99,11 @@ const Sidebar: React.FC<SidebarProps> = ({
           >
             <MessageSquareText size={20} strokeWidth={1.5} />
           </button>
+
+          {/* Dash icon separator */}
+          <div className="sidebar-divider">
+            <Minus size={20} strokeWidth={2} />
+          </div>
 
           <button className="sidebar-nav-item" title="Settings">
             <Settings size={20} strokeWidth={1.5} />

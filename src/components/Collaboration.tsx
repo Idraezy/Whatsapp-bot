@@ -20,7 +20,7 @@ const Collaborations: React.FC<CollaborationsProps> = ({ collaborations }) => {
     <div className="collaborations-panel">
       <div className="collaborations-header">
         <h2 className="collaborations-title">
-          Experience & Collaborations <Briefcase size={24} style={{ display: 'inline', marginLeft: '8px' }} />
+          Experience & Collaborations<Briefcase size={24} style={{ display: 'inline', marginLeft: '8px' }} color='#F8557A' />
         </h2>
         <p className="collaborations-subtitle">Organizations I've worked with</p>
       </div>

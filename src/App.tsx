@@ -24,9 +24,9 @@ import nft from './assets/nft.png';
 
 // Import collaboration company logos
 import cola from './assets/cola.png';
-import colaa from './assets/colaa.png';
-import colaaa from './assets/colaaa.png';
-import flexisafLogo from './assets/logo.png';
+import colaa from './assets/colaa.jpg';
+import colaaa from './assets/colaaa.jpg';
+
 
 function App() {
   // State management
@@ -92,7 +92,7 @@ function App() {
       name: "Portfolio Website",
       description: "Personal portfolio with modern design",
       link: "https://idara-etim-portfolio.vercel.app/",
-      icon: project6, // Using image
+      icon: prof, // Using image
     },
     {
       id: '7',
@@ -100,7 +100,7 @@ function App() {
       description:
         "A decentralized marketplace for trading NFTs with wallet connectivity and smart contract integration built using React, TypeScript, Tailwind CSS, Solidity, Framer Motion, and designed in Figma.",
       link: "https://nft-marketplace-22.vercel.app/",
-      icon: project7, // Using image
+      icon: nft, // Using image
     },
   ];
 
@@ -182,7 +182,7 @@ function App() {
       role: 'Frontend Developer (Internship)',
       period: '2022 - Present',
       description: 'Participated in an intensive internship focused on building production-ready frontend applications.',
-      logo: colaa,
+      logo: colaaa,
     },
     {
       id: '3',
@@ -190,7 +190,7 @@ function App() {
       role: 'Senior Frontend Developer',
       period: '2025 - Present',
       description: 'Building modern, responsive, and animated web interfaces using React.js, TypeScript, Tailwind CSS, and Framer Motion with strong focus on UX and performance.',
-      logo: flexisafLogo,
+      logo: colaa,
     },
     {
       id: '4',
@@ -198,7 +198,7 @@ function App() {
       role: 'Full Stack Developer',
       period: '2024 - Present',
       description: 'Building modern, responsive, and animated web interfaces using React.js, TypeScript, Tailwind CSS, and Framer Motion with strong focus on UX and performance.',
-      logo: colaaa,
+      logo: logo,
     },
   ];
 
