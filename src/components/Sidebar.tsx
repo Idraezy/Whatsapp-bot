@@ -1,11 +1,11 @@
 import React from 'react';
-import { Laptop, PhoneIcon, Settings, ShieldCheck } from 'lucide-react';
+import { Laptop, PhoneIcon, Settings, ShieldCheck, Minus, Megaphone, MessageSquareText } from 'lucide-react';
 import './Sidebar.css';
 import { People } from 'iconsax-react';
 
 interface SidebarProps {
-  activeTab: 'projects' | 'contact' | 'collaborations' | 'skills';
-  onTabChange: (tab: 'projects' | 'contact' | 'collaborations' | 'skills') => void;
+  activeTab: 'projects' | 'contact' | 'collaborations' | 'skills' | 'announcement' | 'writeup';
+  onTabChange: (tab: 'projects' | 'contact' | 'collaborations' | 'skills' | 'announcement' | 'writeup') => void;
   userImage: string | null;
   isOpen: boolean;
   onClose: () => void;
@@ -18,7 +18,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   isOpen,
   onClose 
 }) => {
-  const handleTabClick = (tab: 'projects' | 'contact' | 'collaborations' | 'skills') => {
+  const handleTabClick = (tab: 'projects' | 'contact' | 'collaborations' | 'skills' | 'announcement' | 'writeup') => {
     onTabChange(tab);
     // Close sidebar on mobile after selection
     if (window.innerWidth <= 768) {
@@ -62,7 +62,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             onClick={() => handleTabClick('collaborations')}
             title="Collaborations"
           >
-            <People size={20} variant="Outline" color="currentColor"  />
+            <People size={20} variant="Outline" color="currentColor" />
           </button>
 
           <button
@@ -70,13 +70,41 @@ const Sidebar: React.FC<SidebarProps> = ({
             onClick={() => handleTabClick('skills')}
             title="Skills"
           >
-           <ShieldCheck size={20} strokeWidth={1.5} />
+            <ShieldCheck size={20} strokeWidth={1.5} color='#FF8200'/>
+          </button>
+
+          {/* Dash icon separator */}
+          <div className="sidebar-divider">
+            <Minus size={20} strokeWidth={2} />
+          </div>
+
+          {/* Announcement section */}
+          <button
+            className={`sidebar-nav-item ${activeTab === 'announcement' ? 'active' : ''}`}
+            onClick={() => handleTabClick('announcement')}
+            title="Announcements"
+          >
+            <Megaphone size={20} strokeWidth={1.5} />
           </button>
         </div>
 
         <div className="sidebar-footer">
+          {/* Dash icon separator */}
+          <div className="sidebar-divider">
+            <Minus size={20} strokeWidth={2} />
+          </div>
+
+          {/* Writeup section */}
+          <button
+            className={`sidebar-nav-item ${activeTab === 'writeup' ? 'active' : ''}`}
+            onClick={() => handleTabClick('writeup')}
+            title="Write to Me"
+          >
+            <MessageSquareText size={20} strokeWidth={1.5} />
+          </button>
+
           <button className="sidebar-nav-item" title="Settings">
-           <Settings size={20} strokeWidth={1.5} />
+            <Settings size={20} strokeWidth={1.5} />
           </button>
 
           {/* User Image */}

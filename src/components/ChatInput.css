@@ -45,7 +45,7 @@
 .chat-input {
   flex: 1;
   background: var(--input-bg);
-  border: none;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 9px 12px;
   font-size: 15px;

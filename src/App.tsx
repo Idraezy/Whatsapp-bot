@@ -5,12 +5,13 @@ import ProjectsList, { Project } from './components/ProjectsList';
 import ContactInfo, { ContactLink } from './components/ContactInfo';
 import Collaborations, { Collaboration } from './components/Collaboration';
 import Skills, { Skill } from './components/Skills';
+import Announcement from './components/Announcement';
+import Writeup from './components/Writeup';
 import ChatHeader from './components/ChatHeader';
 import MessageBubble from './components/MessageBubble';
 import TypingIndicator from './components/TypingIndicator';
 import ChatInput from './components/ChatInput';
 import { Message, STATES, StateType } from './types';
-
 
 // Import project images
 import logo from './assets/logo.png';
@@ -18,9 +19,14 @@ import logoo from './assets/logoo.jpeg';
 import logooo from './assets/logooo.png';
 import logoooo from './assets/logoooo.jpeg';
 import logooooo from './assets/logooooo.jpeg';
-import nft from './assets/nft.png';
 import prof from './assets/prof.jpg';
+import nft from './assets/nft.png';
+
+// Import collaboration company logos
 import cola from './assets/cola.png';
+import colaa from './assets/colaa.png';
+import colaaa from './assets/colaaa.png';
+import flexisafLogo from './assets/logo.png';
 
 function App() {
   // State management
@@ -36,7 +42,7 @@ function App() {
   const [invalidAttempts, setInvalidAttempts] = useState<number>(0);
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const [activeTab, setActiveTab] = useState<'projects' | 'contact' | 'collaborations' | 'skills'>('projects');
+  const [activeTab, setActiveTab] = useState<'projects' | 'contact' | 'collaborations' | 'skills' | 'announcement' | 'writeup'>('projects');
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
 
   // Projects data - Using imported images
@@ -86,7 +92,7 @@ function App() {
       name: "Portfolio Website",
       description: "Personal portfolio with modern design",
       link: "https://idara-etim-portfolio.vercel.app/",
-      icon: prof, // Using image
+      icon: project6, // Using image
     },
     {
       id: '7',
@@ -94,80 +100,73 @@ function App() {
       description:
         "A decentralized marketplace for trading NFTs with wallet connectivity and smart contract integration built using React, TypeScript, Tailwind CSS, Solidity, Framer Motion, and designed in Figma.",
       link: "https://nft-marketplace-22.vercel.app/",
-      icon: nft, // Using image
+      icon: project7, // Using image
     },
   ];
 
   // Contact/Social links - Using Lucide icon names
   const contactLinks: ContactLink[] = [
-  {
-    id: '1',
-    platform: 'GitHub',
-    username: '@Idraezy',
-    url: 'https://github.com/Idraezy',
-    icon: 'Github',
-    bgColor: '#000409', // GitHub black
-  },
-  {
-    id: '2',
-    platform: 'LinkedIn',
-    username: 'Idara Etim',
-    url: 'https://www.linkedin.com/in/etimidaraubong',
-    icon: 'Linkedin',
-    bgColor: '#0077B5', // LinkedIn blue
-  },
-  {
-    id: '3',
-    platform: 'Twitter (X)',
-    username: '@Idara_etimm',
-    url: 'https://twitter.com/Idara_etimm',
-    icon: 'Twitter',
-    bgColor: '#1DA1F2', // Twitter blue
-  },
-  {
-    id: '4',
-    platform: 'Facebook',
-    username: 'Idara Etim',
-    url: 'https://facebook.com/idaraetimm',
-    icon: 'Facebook',
-    bgColor: '#1877F2', // Facebook blue
-  },
-  {
-    id: '5',
-    platform: 'Instagram',
-    username: '@idaraetimm',
-    url: 'https://instagram.com/idaraetimm',
-    icon: 'Instagram',
-    bgColor: 'linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)', // Instagram gradient
-  },
-  {
-    id: '6',
-    platform: 'TikTok',
-    username: '@idara_etim',
-    url: 'https://tiktok.com/@idara_etim',
-    icon: 'Music',
-    bgColor: '#000000', // TikTok black (can add neon effect later)
-  },
-  {
-    id: '7',
-    platform: 'WhatsApp',
-    username: 'Chat on WhatsApp',
-    url: 'https://wa.me/2347045256955',
-    icon: 'MessageCirclePlus',
-    bgColor: '#25D366', // WhatsApp green'
-  },
-  {
-    id: '8',
-    platform: 'Email',
-    username: 'idraezynoks@gmail.com',
-    url: 'mailto:idraezynoks@gmail.com',
-    icon: 'Mail',
-    bgColor: '#D44638', // Gmail red
-  },
-];
+    {
+      id: '1',
+      platform: 'GitHub',
+      username: '@Idraezy',
+      url: 'https://github.com/Idraezy',
+      icon: 'Github', // Lucide icon
+    },
+    {
+      id: '2',
+      platform: 'LinkedIn',
+      username: 'Idara Etim',
+      url: 'https://www.linkedin.com/in/etimidaraubong',
+      icon: 'Linkedin', // Lucide icon
+    },
+    {
+      id: '3',
+      platform: 'Twitter (X)',
+      username: '@Idara_etimm',
+      url: 'https://twitter.com/Idara_etimm',
+      icon: 'Twitter', // Lucide icon
+    },
+    {
+      id: '4',
+      platform: 'Facebook',
+      username: 'Idara Etim',
+      url: 'https://facebook.com/idaraetimm',
+      icon: 'Facebook', // Lucide icon
+    },
+    {
+      id: '5',
+      platform: 'Instagram',
+      username: '@idaraetimm',
+      url: 'https://instagram.com/idaraetimm',
+      icon: 'Instagram', // Lucide icon
+    },
+    {
+      id: '6',
+      platform: 'TikTok',
+      username: '@idara_etim',
+      url: 'https://tiktok.com/@idara_etim',
+      icon: 'Music', // Lucide icon (closest to TikTok)
+      type: 'tiktok',
+    },
+    {
+      id: '7',
+      platform: 'WhatsApp',
+      username: 'Chat on WhatsApp',
+      url: 'https://wa.me/2347045256955',
+      icon: 'MessageCircle', // Lucide icon
+      type: 'whatsapp',
+    },
+    {
+      id: '8',
+      platform: 'Email',
+      username: 'idraezynoks@gmail.com',
+      url: 'mailto:idraezynoks@gmail.com',
+      icon: 'Mail', // Lucide icon
+    },
+  ];
 
-
-  // Collaborations/Experience data - Using Lucide icon names
+  // Collaborations/Experience data - Using company logo images
   const collaborations: Collaboration[] = [
     {
       id: '1',
@@ -175,7 +174,7 @@ function App() {
       role: 'Frontend Developer',
       period: '2023 - Present',
       description: 'Worked on real-world frontend projects in a collaborative development environment.',
-      logo: 'Rocket', // Lucide icon
+      logo: cola,
     },
     {
       id: '2',
@@ -183,7 +182,7 @@ function App() {
       role: 'Frontend Developer (Internship)',
       period: '2022 - Present',
       description: 'Participated in an intensive internship focused on building production-ready frontend applications.',
-      logo: 'Link', // Lucide icon
+      logo: colaa,
     },
     {
       id: '3',
@@ -191,7 +190,7 @@ function App() {
       role: 'Senior Frontend Developer',
       period: '2025 - Present',
       description: 'Building modern, responsive, and animated web interfaces using React.js, TypeScript, Tailwind CSS, and Framer Motion with strong focus on UX and performance.',
-      logo: 'Palette', // Lucide icon
+      logo: flexisafLogo,
     },
     {
       id: '4',
@@ -199,7 +198,7 @@ function App() {
       role: 'Full Stack Developer',
       period: '2024 - Present',
       description: 'Building modern, responsive, and animated web interfaces using React.js, TypeScript, Tailwind CSS, and Framer Motion with strong focus on UX and performance.',
-      logo: 'Briefcase', // Lucide icon
+      logo: colaaa,
     },
   ];
 
@@ -484,7 +483,7 @@ function App() {
           onClose={() => setIsSidebarOpen(false)}
         />
 
-        {/* Middle Panel - Projects, Contact, Collaborations, or Skills */}
+        {/* Middle Panel - Projects, Contact, Collaborations, Skills, Announcement, or Writeup */}
         {activeTab === 'projects' && (
           <ProjectsList projects={projects} onProjectClick={handleProjectClick} />
         )}
@@ -496,6 +495,12 @@ function App() {
         )}
         {activeTab === 'skills' && (
           <Skills skills={skills} />
+        )}
+        {activeTab === 'announcement' && (
+          <Announcement />
+        )}
+        {activeTab === 'writeup' && (
+          <Writeup />
         )}
 
         {/* Right Panel - Chat Section */}

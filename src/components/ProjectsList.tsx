@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { CodeXml } from 'lucide-react';
 import './ProjectsList.css';
 
 export interface Project {
@@ -15,21 +16,33 @@ interface ProjectsListProps {
 }
 
 const ProjectsList: React.FC<ProjectsListProps> = ({ projects, onProjectClick }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Filter projects based on search term
+  const filteredProjects = projects.filter(project =>
+    project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    project.description.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="projects-panel">
       <div className="projects-header">
-        <h2 className="projects-title">My Projects</h2>
+        <h2 className="projects-title">
+          My Projects<CodeXml size={24} style={{ display: 'inline', marginLeft: '8px' }} color='#FF8200' />
+        </h2>
         <div className="projects-search">
           <input 
             type="text" 
             placeholder="Search projects..." 
             className="search-input"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
       </div>
 
       <div className="projects-list">
-        {projects.map((project) => (
+        {filteredProjects.map((project) => (
           <div
             key={project.id}
             className="project-item"
@@ -47,6 +60,11 @@ const ProjectsList: React.FC<ProjectsListProps> = ({ projects, onProjectClick })
             </div>
           </div>
         ))}
+        {filteredProjects.length === 0 && (
+          <div style={{ padding: '20px', textAlign: 'center', color: 'var(--text-secondary)' }}>
+            No projects found
+          </div>
+        )}
       </div>
     </div>
   );
