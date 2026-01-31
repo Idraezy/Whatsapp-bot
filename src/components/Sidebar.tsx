@@ -70,7 +70,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             onClick={() => handleTabClick('skills')}
             title="Skills"
           >
-            <ShieldCheck size={20} strokeWidth={1.5} color='#FF8200'/>
+            <ShieldCheck size={20} strokeWidth={1.5} />
           </button>
 
           {/* Dash icon separator */}

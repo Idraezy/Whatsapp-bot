@@ -5,6 +5,37 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
+}
+
+/* Mobile Close Button */
+.mobile-panel-close {
+  display: none;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  background: var(--app-bg);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px var(--shadow-light);
+}
+
+.mobile-panel-close:hover {
+  background: var(--border-color);
+}
+
+@media (max-width: 768px) {
+  .mobile-panel-close {
+    display: flex;
+  }
 }
 
 .writeup-header {

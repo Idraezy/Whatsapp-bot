@@ -137,6 +137,7 @@ body {
     height: 100vh;
     max-height: 100vh;
     border-radius: 0;
+    position: relative;
   }
 
   .chat-wrapper {
@@ -145,6 +146,35 @@ body {
 
   .messages-container {
     padding: 15px 5%;
+  }
+
+  /* Hide middle panels by default on mobile */
+  .projects-panel,
+  .contact-panel,
+  .collaborations-panel,
+  .skills-panel,
+  .announcement-panel,
+  .writeup-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 900;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  /* Show panel when it becomes active */
+  .projects-panel.mobile-active,
+  .contact-panel.mobile-active,
+  .collaborations-panel.mobile-active,
+  .skills-panel.mobile-active,
+  .announcement-panel.mobile-active,
+  .writeup-panel.mobile-active {
+    transform: translateX(0);
   }
 }
 
