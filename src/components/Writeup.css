@@ -185,14 +185,3 @@
     width: 350px;
   }
 }
-
-@media (max-width: 768px) {
-  .writeup-panel {
-    width: 100%;
-    display: none;
-  }
-
-  .writeup-panel.active {
-    display: flex;
-  }
-}

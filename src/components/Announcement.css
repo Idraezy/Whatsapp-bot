@@ -127,14 +127,3 @@
     width: 350px;
   }
 }
-
-@media (max-width: 768px) {
-  .announcement-panel {
-    width: 100%;
-    display: none;
-  }
-
-  .announcement-panel.active {
-    display: flex;
-  }
-}

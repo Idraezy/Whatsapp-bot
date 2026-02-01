@@ -152,15 +152,8 @@
   opacity: 1;
 }
 
-/* Mobile - hide projects panel, show as modal or bottom sheet */
 @media (max-width: 1024px) {
   .projects-panel {
     width: 350px;
-  }
-}
-
-@media (max-width: 768px) {
-  .projects-panel {
-    display: none; /* Can be toggled with button */
   }
 }

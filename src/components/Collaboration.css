@@ -148,14 +148,3 @@
     width: 350px;
   }
 }
-
-@media (max-width: 768px) {
-  .collaborations-panel {
-    width: 100%;
-    display: none;
-  }
-
-  .collaborations-panel.active {
-    display: flex;
-  }
-}

@@ -160,15 +160,6 @@
 }
 
 @media (max-width: 768px) {
-  .skills-panel {
-    width: 100%;
-    display: none;
-  }
-
-  .skills-panel.active {
-    display: flex;
-  }
-
   .skills-list {
     padding: 12px;
   }

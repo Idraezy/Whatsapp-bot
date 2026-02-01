@@ -151,15 +151,8 @@
   line-height: 1.4;
 }
 
-/* Mobile - hide contact panel */
 @media (max-width: 1024px) {
   .contact-panel {
     width: 350px;
-  }
-}
-
-@media (max-width: 768px) {
-  .contact-panel {
-    display: none;
   }
 }

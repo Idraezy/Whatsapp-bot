@@ -1,23 +1,12 @@
-import { useState, useEffect, useRef, lazy, Suspense } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './App.css';
 import Sidebar from './components/Sidebar';
-
-
-import ProjectsList, { Project} from './components/ProjectsList';
+import ProjectsList, { Project } from './components/ProjectsList';
 import ContactInfo, { ContactLink } from './components/ContactInfo';
 import Collaborations, { Collaboration } from './components/Collaboration';
 import Skills, { Skill } from './components/Skills';
 import Announcement from './components/Announcement';
 import Writeup from './components/Writeup';
-
-
-// const ProjectsList = lazy(() => import('./components/ProjectsList'));
-// const ContactInfo = lazy(() => import('./components/ContactInfo'));
-// const Collaborations = lazy(() => import('./components/Collaboration'));
-// const Skills = lazy(() => import('./components/Skills'));
-// const Announcement = lazy(() => import('./components/Announcement'));
-// const Writeup = lazy(() => import('./components/Writeup'));
-
 import ChatHeader from './components/ChatHeader';
 import MessageBubble from './components/MessageBubble';
 import TypingIndicator from './components/TypingIndicator';
@@ -25,23 +14,19 @@ import ChatInput from './components/ChatInput';
 import { Message, STATES, StateType } from './types';
 
 // Import project images
-import logo from './assets/logo.png';
-import logoo from './assets/logoo.jpeg';
-import logooo from './assets/logooo.png';
-import logoooo from './assets/logoooo.jpeg';
-import logooooo from './assets/logooooo.jpeg';
-import prof from './assets/prof.jpg';
+import logo from './assets/logo.png'; 
+import logoo from './assets/logoo.jpeg'; 
+import logooo from './assets/logooo.png'; 
+import logoooo from './assets/logoooo.jpeg'; 
+import logooooo from './assets/logooooo.jpeg'; 
+import prof from './assets/prof.jpg'; 
 import nft from './assets/nft.png';
 
-// Import collaboration company logos
-import cola from './assets/cola.png';
-import colaa from './assets/colaa.jpg';
+// Import collaboration company logos (using project images as placeholders)
+// Replace these with your actual company logo files when you have them
+import cola from './assets/cola.png'; 
+import colaa from './assets/colaa.jpg'; 
 import colaaa from './assets/colaaa.jpg';
-import { Project } from './components/ProjectsList';
-import { ContactLink } from './components/ContactInfo';
-import { Collaboration } from './components/Collaboration';
-import { Skill } from './components/Skills';
-
 
 function App() {
   // State management
@@ -59,6 +44,7 @@ function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [activeTab, setActiveTab] = useState<'projects' | 'contact' | 'collaborations' | 'skills' | 'announcement' | 'writeup'>('projects');
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const [showMobilePanel, setShowMobilePanel] = useState<boolean>(false);
 
   // Projects data - Using imported images
   const projects: Project[] = [
@@ -136,7 +122,6 @@ function App() {
       url: 'https://www.linkedin.com/in/etimidaraubong',
       icon: 'Linkedin', // Lucide icon
       bgColor: '#0077B5', // LinkedIn blue
-
     },
     {
       id: '3',
@@ -180,15 +165,15 @@ function App() {
       type: 'whatsapp',
       bgColor: '#25D366', // WhatsApp green
     },
-    
-  {
-     id: '8',
-     platform: 'Email',
-     username: 'idraezynoks@gmail.com',
-     url: 'mailto:idraezynoks@gmail.com',
-     icon: 'Mail', // Lucide icon
-     bgColor: `linear-gradient(135deg, #0087F4 0%, #DB0000 25%, #FF2F19 45%, #FFB900 70%, #00AA5A 100%)`,},
-];
+    {
+      id: '8',
+      platform: 'Email',
+      username: 'idraezynoks@gmail.com',
+      url: 'mailto:idraezynoks@gmail.com',
+      icon: 'Mail', // Lucide icon
+      bgColor: 'linear-gradient(135deg, #0087F4 0%, #DB0000 25%, #FF2F19 45%, #FFB900 70%, #00AA5A 100%)',
+    },
+  ];
 
   // Collaborations/Experience data - Using company logo images
   const collaborations: Collaboration[] = [
@@ -204,7 +189,7 @@ function App() {
       id: '2',
       company: 'HNG',
       role: 'Frontend Developer (Internship)',
-      period: '2024 - 2025',
+      period: '2022 - Present',
       description: 'Participated in an intensive internship focused on building production-ready frontend applications.',
       logo: colaaa,
     },
@@ -229,23 +214,20 @@ function App() {
   // Skills data - Using Lucide icon names
   const skills: Skill[] = [
     // Frontend
-    { id: '1', name: 'React.js', category: 'FRONTEND', level: 95, icon: 'Component' },
-    { id: '2', name: 'TypeScript', category: 'FRONTEND', level: 90, icon: 'FileCode' },
-    { id: '3', name: 'Next.js', category: 'FRONTEND', level: 85, icon: 'Triangle' },
-    { id: '4', name: 'Tailwind CSS', category: 'FRONTEND', level: 95, icon: 'Paintbrush' },
-    { id: '5', name: 'JavaScript', category: 'FRONTEND', level: 95, icon: 'Code' },
-    { id: '6', name: 'HTML/CSS', category: 'FRONTEND', level: 98, icon: 'Globe' },
-
-// Backend
-   { id: '7', name: 'Node.js', category: 'BACKEND', level: 80, icon: 'Server' },
-   { id: '8', name: 'Express.js', category: 'BACKEND', level: 75, icon: 'Zap' },
-   { id: '9', name: 'MongoDB', category: 'BACKEND', level: 70, icon: 'Database' },
-
-// Tools & Others
-   { id: '10', name: 'Git/GitHub', category: 'TOOLS', level: 90, icon: 'GitBranch' },
-   { id: '11', name: 'Figma', category: 'DESIGN', level: 85, icon: 'Figma' },
-   { id: '12', name: 'Smart Contracts', category: 'WEB3', level: 65, icon: 'FileText' },
-
+    { id: '1', name: 'React.js', category: 'FRONTEND', level: 95, icon: 'Component' }, 
+    { id: '2', name: 'TypeScript', category: 'FRONTEND', level: 90, icon: 'FileCode' }, 
+    { id: '3', name: 'Next.js', category: 'FRONTEND', level: 85, icon: 'Triangle' }, 
+    { id: '4', name: 'Tailwind CSS', category: 'FRONTEND', level: 95, icon: 'Paintbrush' }, 
+    { id: '5', name: 'JavaScript', category: 'FRONTEND', level: 95, icon: 'Code' }, 
+    { id: '6', name: 'HTML/CSS', category: 'FRONTEND', level: 98, icon: 'Globe' }, 
+    // Backend 
+     { id: '7', name: 'Node.js', category: 'BACKEND', level: 80, icon: 'Server' }, 
+     { id: '8', name: 'Express.js', category: 'BACKEND', level: 75, icon: 'Zap' }, 
+     { id: '9', name: 'MongoDB', category: 'BACKEND', level: 70, icon: 'Database' }, 
+     // Tools & Others 
+     { id: '10', name: 'Git/GitHub', category: 'TOOLS', level: 90, icon: 'GitBranch' }, 
+     { id: '11', name: 'Figma', category: 'DESIGN', level: 85, icon: 'Figma' }, 
+     { id: '12', name: 'Smart Contracts', category: 'WEB3', level: 65, icon: 'FileText' },
   ];
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -406,7 +388,7 @@ function App() {
 
   // Handle third interaction - show menu
   const handleIntro3 = (): void => {
-    const menuMessage = `What would you like to explore? 👇\n\nA️. About Me \nB️. Projects  \nC️. Contact Information  \n\nPlease type A, B, or C.`;
+    const menuMessage = `What would you like to explore? 👇\n\nA️. About Me \nB️. Projects \nC️. Contact Information \n\nPlease type A, B, or C.`;
     addBotMessage(menuMessage, 1500);
     setCurrentState(STATES.ASK_CHOICE);
     setInvalidAttempts(0);
@@ -462,7 +444,7 @@ function App() {
 
   // Show Projects section
   const handleProjectsChoice = (): void => {
-    const projectsText = `💼 My Projects\n\nCheck out the projects list in the middle panel! 👈\nClick on any project to learn more about it.\n\nYou can also view:\n\n1. E-Commerce Platform\n   Built with React, TypeScript, Tailwind CSS, Framer Motion, and Designed in Figma.\n\n2. ATS Pro – Resume & ATS Checker\n   Built with React, TypeScript, Tailwind CSS, Framer Motion, and LocalStorage.\n\n3.  Landing Page Generator\n   Built with React, TypeScript, Tailwind CSS, Framer Motion, and Figma. etc\n\n---\n\nWhat else would you like to know?\nA️ About Me\nB️ Projects\nC️ Contact Information`;
+    const projectsText = `💼 My Projects\n\nCheck out the projects list in the middle panel! 👈\nClick on any project to learn more about it.\n\nYou can also view:\n\n1. E-Commerce Platform\n Built with React, TypeScript, Tailwind CSS, Framer Motion, and Designed in Figma.\n\n2. ATS Pro – Resume & ATS Checker\n Built with React, TypeScript, Tailwind CSS, Framer Motion, and LocalStorage.\n\n3. Landing Page Generator\n Built with React, TypeScript, Tailwind CSS, Framer Motion, and Figma. etc\n\n---\n\nWhat else would you like to know?\nA️ About Me\nB️ Projects\nC️ Contact Information`;
     
     addBotMessage(projectsText, 1200);
     setCurrentState(STATES.SHOW_PROJECTS);
@@ -502,63 +484,54 @@ function App() {
         {/* Left Sidebar - Navigation Icons */}
         <Sidebar 
           activeTab={activeTab} 
-          onTabChange={setActiveTab}
+          onTabChange={(tab) => { setActiveTab(tab); setShowMobilePanel(true); }}
           userImage={userImage}
           isOpen={isSidebarOpen}
           onClose={() => setIsSidebarOpen(false)}
         />
 
         {/* Middle Panel - Projects, Contact, Collaborations, Skills, Announcement, or Writeup */}
-        <Suspense fallback={<div>Loading...</div>}>
         {activeTab === 'projects' && (
-          <ProjectsList projects={projects} 
-          onProjectClick={handleProjectClick}
-          onClose={() => setActiveTab('projects')}
-          isMobileActive={activeTab === 'projects'} />
+          <ProjectsList 
+            projects={projects} 
+            onProjectClick={handleProjectClick}
+            onClose={() => setShowMobilePanel(false)}
+            isMobileActive={showMobilePanel && activeTab === 'projects'}
+          />
         )}
-        </Suspense>
-        <Suspense fallback={<div>Loading...</div>}>
         {activeTab === 'contact' && (
-          <ContactInfo contacts={contactLinks}
-           onClose={() => setActiveTab('projects')}
-           isMobileActive={activeTab === 'contact'}
-         />
+          <ContactInfo 
+            contacts={contactLinks}
+            onClose={() => setShowMobilePanel(false)}
+            isMobileActive={showMobilePanel && activeTab === 'contact'}
+          />
         )}
-        </Suspense>
-        <Suspense fallback={<div>Loading...</div>}>
         {activeTab === 'collaborations' && (
           <Collaborations 
-           collaborations={collaborations}
-          onClose={() => setActiveTab('projects')}
-          isMobileActive={activeTab === 'collaborations'} 
-         />
+            collaborations={collaborations}
+            onClose={() => setShowMobilePanel(false)}
+            isMobileActive={showMobilePanel && activeTab === 'collaborations'}
+          />
         )}
-        </Suspense>
-        <Suspense fallback={<div>Loading...</div>}>
         {activeTab === 'skills' && (
           <Skills 
-            skills={skills} 
-            onClose={() => setActiveTab('projects')}
-            isMobileActive={activeTab === 'skills'}
+            skills={skills}
+            onClose={() => setShowMobilePanel(false)}
+            isMobileActive={showMobilePanel && activeTab === 'skills'}
           />
         )}
-        </Suspense>
-        <Suspense fallback={<div>Loading...</div>}>
         {activeTab === 'announcement' && (
-          <Announcement
-            onClose={() => setActiveTab('projects')}
-            isMobileActive={activeTab === 'announcement'} 
+          <Announcement 
+            onClose={() => setShowMobilePanel(false)}
+            isMobileActive={showMobilePanel && activeTab === 'announcement'}
           />
         )}
-        </Suspense>
-        <Suspense fallback={<div>Loading...</div>}>
         {activeTab === 'writeup' && (
           <Writeup 
-            onClose={() => setActiveTab('projects')}
-            isMobileActive={activeTab === 'writeup'}
-         />
+            onClose={() => setShowMobilePanel(false)}
+            isMobileActive={showMobilePanel && activeTab === 'writeup'}
+          />
         )}
-        </Suspense>
 
         {/* Right Panel - Chat Section */}
         <div className="chat-wrapper">
