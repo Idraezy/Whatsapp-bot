@@ -1,12 +1,23 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import './App.css';
 import Sidebar from './components/Sidebar';
-import ProjectsList, { Project } from './components/ProjectsList';
+
+
+import ProjectsList, { Project} from './components/ProjectsList';
 import ContactInfo, { ContactLink } from './components/ContactInfo';
 import Collaborations, { Collaboration } from './components/Collaboration';
 import Skills, { Skill } from './components/Skills';
 import Announcement from './components/Announcement';
 import Writeup from './components/Writeup';
+
+
+// const ProjectsList = lazy(() => import('./components/ProjectsList'));
+// const ContactInfo = lazy(() => import('./components/ContactInfo'));
+// const Collaborations = lazy(() => import('./components/Collaboration'));
+// const Skills = lazy(() => import('./components/Skills'));
+// const Announcement = lazy(() => import('./components/Announcement'));
+// const Writeup = lazy(() => import('./components/Writeup'));
+
 import ChatHeader from './components/ChatHeader';
 import MessageBubble from './components/MessageBubble';
 import TypingIndicator from './components/TypingIndicator';
@@ -26,6 +37,10 @@ import nft from './assets/nft.png';
 import cola from './assets/cola.png';
 import colaa from './assets/colaa.jpg';
 import colaaa from './assets/colaaa.jpg';
+import { Project } from './components/ProjectsList';
+import { ContactLink } from './components/ContactInfo';
+import { Collaboration } from './components/Collaboration';
+import { Skill } from './components/Skills';
 
 
 function App() {
@@ -494,18 +509,23 @@ function App() {
         />
 
         {/* Middle Panel - Projects, Contact, Collaborations, Skills, Announcement, or Writeup */}
+        <Suspense fallback={<div>Loading...</div>}>
         {activeTab === 'projects' && (
           <ProjectsList projects={projects} 
           onProjectClick={handleProjectClick}
           onClose={() => setActiveTab('projects')}
           isMobileActive={activeTab === 'projects'} />
         )}
+        </Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
         {activeTab === 'contact' && (
           <ContactInfo contacts={contactLinks}
            onClose={() => setActiveTab('projects')}
            isMobileActive={activeTab === 'contact'}
          />
         )}
+        </Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
         {activeTab === 'collaborations' && (
           <Collaborations 
            collaborations={collaborations}
@@ -513,6 +533,8 @@ function App() {
           isMobileActive={activeTab === 'collaborations'} 
          />
         )}
+        </Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
         {activeTab === 'skills' && (
           <Skills 
             skills={skills} 
@@ -520,18 +542,23 @@ function App() {
             isMobileActive={activeTab === 'skills'}
           />
         )}
+        </Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
         {activeTab === 'announcement' && (
           <Announcement
             onClose={() => setActiveTab('projects')}
             isMobileActive={activeTab === 'announcement'} 
           />
         )}
+        </Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
         {activeTab === 'writeup' && (
           <Writeup 
             onClose={() => setActiveTab('projects')}
             isMobileActive={activeTab === 'writeup'}
          />
         )}
+        </Suspense>
 
         {/* Right Panel - Chat Section */}
         <div className="chat-wrapper">
