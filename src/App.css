@@ -142,13 +142,14 @@ body {
 
   .chat-wrapper {
     width: 100%;
+    flex: 1;
   }
 
   .messages-container {
     padding: 15px 5%;
   }
 
-  /* Hide middle panels by default on mobile */
+  /* On mobile, panels are position:fixed overlays — remove them from flex flow entirely */
   .projects-panel,
   .contact-panel,
   .collaborations-panel,
@@ -165,6 +166,7 @@ body {
     flex-direction: column;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
+    background: var(--bot-bubble);
   }
 
   /* Show panel when it becomes active */

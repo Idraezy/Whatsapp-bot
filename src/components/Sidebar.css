@@ -145,9 +145,11 @@
     transform: translateX(-100%);
     z-index: 1000;
     padding: 20px 0;
+    display: none;
   }
 
   .sidebar-open {
+    display: flex;
     transform: translateX(0);
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
   }
@@ -229,3 +231,5 @@
     height: 50px;
   }
 }
+
+
