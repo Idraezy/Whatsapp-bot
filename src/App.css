@@ -1,6 +1,6 @@
 :root {
-  /* Light Mode Colors - WhatsApp Web Official */
   --primary-green: #00A884;
+  --primary-blue: #2563EB;
   --header-bg: #00A884;
   --app-bg: #F0F2F5;
   --chat-bg: #EFEAE2;
@@ -16,8 +16,8 @@
 }
 
 [data-theme="dark"] {
-  /* Dark Mode Colors - WhatsApp Web Official */
   --primary-green: #00A884;
+  --primary-blue: #2563EB;
   --header-bg: #202C33;
   --app-bg: #0B141A;
   --chat-bg: #0B141A;
@@ -66,6 +66,13 @@ body {
   overflow: hidden;
 }
 
+/* ==================== DESKTOP LAYOUT ==================== */
+.desktop-layout {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
 .chat-wrapper {
   flex: 1;
   background: var(--chat-bg);
@@ -92,7 +99,7 @@ body {
 
 [data-theme="dark"] .messages-container {
   background-image: 
-    repeating-linear-linear-gradient(
+    repeating-linear-gradient(
       45deg,
       transparent,
       transparent 10px,
@@ -101,7 +108,6 @@ body {
     );
 }
 
-/* Custom scrollbar - WhatsApp style */
 .messages-container::-webkit-scrollbar {
   width: 6px;
 }
@@ -120,33 +126,33 @@ body {
   background: var(--text-secondary);
 }
 
-/* Desktop layout */
-.desktop-layout {
-  display: flex;
-  width: 100%;
-  height: 100vh;
-}
-
-/* Mobile layout hidden on desktop */
+/* ==================== MOBILE LAYOUT ==================== */
 .mobile-layout {
   display: none;
 }
 
-/* Mobile-specific styles */
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+  .whatsapp-layout {
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
   /* Hide desktop, show mobile */
   .desktop-layout {
-    display: none;
+    display: none !important;
   }
 
   .mobile-layout {
     display: flex;
     flex-direction: column;
-    height: 100vh;
     width: 100%;
+    height: 100vh;
+    background: var(--app-bg);
   }
 
-  /* Sticky top section */
+  /* Mobile sticky top section */
   .mobile-sticky-top {
     position: sticky;
     top: 0;
@@ -154,11 +160,14 @@ body {
     background: var(--bot-bubble);
   }
 
-  /* Search bar */
+  /* Mobile search bar */
   .mobile-search-bar {
     padding: 8px 16px;
     background: var(--bot-bubble);
     border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 104px; /* Below announcements + message me */
+    z-index: 99;
   }
 
   .mobile-search-input {
@@ -172,23 +181,24 @@ body {
     outline: none;
   }
 
-  /* Content area scrollable */
+  .mobile-search-input::placeholder {
+    color: var(--text-tertiary);
+  }
+
+  /* Mobile content area */
   .mobile-content-area {
     flex: 1;
     overflow-y: auto;
     background: var(--app-bg);
-    padding-bottom: 60px; /* Space for bottom nav */
+    padding-bottom: 70px; /* Space for bottom nav */
   }
 
-  /* Placeholder lists for calls, collaborations, tools */
-  .mobile-contacts-list,
-  .mobile-collaborations-list,
-  .mobile-tools-list {
-    display: flex;
-    flex-direction: column;
+  .mobile-content-area::-webkit-scrollbar {
+    width: 0;
+    display: none;
   }
 
-  /* On mobile, panels are position:fixed overlays — remove them from flex flow entirely */
+  /* Panel mobile fixes */
   .projects-panel,
   .contact-panel,
   .collaborations-panel,
@@ -208,7 +218,6 @@ body {
     background: var(--bot-bubble);
   }
 
-  /* Show panel when it becomes active */
   .projects-panel.mobile-active,
   .contact-panel.mobile-active,
   .collaborations-panel.mobile-active,
@@ -217,11 +226,41 @@ body {
   .writeup-panel.mobile-active {
     transform: translateX(0);
   }
+
+  .app-container {
+    padding: 0;
+  }
+
+  .whatsapp-layout {
+    max-width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+    position: relative;
+  }
+
+  .chat-wrapper {
+    width: 100%;
+    flex: 1;
+  }
+
+  .messages-container {
+    padding: 15px 5%;
+  }
 }
 
 @media (max-width: 480px) {
   .messages-container {
     padding: 10px 3%;
+  }
+
+  .mobile-search-bar {
+    padding: 6px 12px;
+  }
+
+  .mobile-search-input {
+    padding: 8px 12px;
+    font-size: 13px;
   }
 }
 
