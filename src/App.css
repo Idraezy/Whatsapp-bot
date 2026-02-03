@@ -277,3 +277,155 @@ body {
     max-height: 100vh;
   }
 }
+/* ==================== MOBILE MAIN CHAT ==================== */
+@media (max-width: 768px) {
+  .mobile-panel-view {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+    background: var(--bot-bubble);
+    overflow-y: auto;
+  }
+
+  .mobile-main-chat {
+    display: none; /* Hidden by default, shown when needed */
+    flex-direction: column;
+    height: auto;
+    background: var(--chat-bg);
+    border-top: 1px solid var(--border-color);
+  }
+
+  /* Show chat when floating button is clicked or on projects tab */
+  .mobile-layout:not(:has(.mobile-panel-view)) .mobile-main-chat {
+    display: flex;
+  }
+
+  .mobile-chat-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--header-bg);
+    color: #FFFFFF;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  [data-theme="dark"] .mobile-chat-header {
+    background: var(--header-bg);
+  }
+
+  .mobile-chat-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .mobile-chat-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .mobile-chat-avatar span {
+    font-size: 20px;
+  }
+
+  .mobile-chat-info {
+    flex: 1;
+  }
+
+  .mobile-chat-info h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 2px 0;
+  }
+
+  .mobile-chat-info p {
+    font-size: 13px;
+    margin: 0;
+    opacity: 0.8;
+  }
+
+  .mobile-theme-toggle {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+
+  .mobile-theme-toggle:active {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .mobile-messages-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    background-color: var(--chat-bg);
+    background-image: 
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(0, 0, 0, 0.015) 10px,
+        rgba(0, 0, 0, 0.015) 20px
+      );
+    min-height: 300px;
+    max-height: 400px;
+  }
+
+  [data-theme="dark"] .mobile-messages-container {
+    background-image: 
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255, 255, 255, 0.02) 10px,
+        rgba(255, 255, 255, 0.02) 20px
+      );
+  }
+
+  .mobile-messages-container::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .mobile-messages-container::-webkit-scrollbar-thumb {
+    background: var(--text-tertiary);
+    border-radius: 2px;
+  }
+
+  .mobile-chat-input-wrapper {
+    padding: 8px;
+    background: var(--bot-bubble);
+    border-top: 1px solid var(--border-color);
+  }
+
+  /* Make sure panels appear above everything when active */
+  .mobile-panel-view .projects-panel,
+  .mobile-panel-view .contact-panel,
+  .mobile-panel-view .collaborations-panel,
+  .mobile-panel-view .skills-panel,
+  .mobile-panel-view .announcement-panel,
+  .mobile-panel-view .writeup-panel {
+    position: relative;
+    transform: translateX(0) !important;
+    z-index: auto;
+  }
+}

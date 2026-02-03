@@ -459,45 +459,56 @@ function App() {
   };
 
   // Mobile handlers (NEW)
+  // Mobile handlers (UPDATED - Navigate to existing desktop pages)
   const handleMobileProjectClick = (project: any): void => {
-    setSelectedMobileItem(project);
-    setMobileChatType('project');
-    setIsMobileChatOpen(true);
+    // Find and click the actual project in desktop component
+    handleProjectClick(projects.find(p => p.id === project.id)!);
+    // Switch to projects view
+    setActiveTab('projects');
+    setShowMobilePanel(true);
   };
 
   const handleMobileContactClick = (contact: any): void => {
-    // Open external link
+    // Open contact link directly (no navigation needed for external links)
     window.open(contact.url, '_blank');
   };
 
   const handleMobileCollabClick = (collab: any): void => {
-    setSelectedMobileItem(collab);
-    setMobileChatType('project');
-    setIsMobileChatOpen(true);
+    // Switch to collaborations view
+    setActiveTab('collaborations');
+    setShowMobilePanel(true);
   };
 
   const handleMobileToolClick = (skill: any): void => {
-    setSelectedMobileItem(skill);
-    setMobileChatType('project');
-    setIsMobileChatOpen(true);
+    // Switch to skills view
+    setActiveTab('skills');
+    setShowMobilePanel(true);
   };
 
   const handleFloatingChatClick = (): void => {
-    setSelectedMobileItem(null);
-    setMobileChatType('bot');
-    setIsMobileChatOpen(true);
-  };
-
-  const handleMobileChatBack = (): void => {
-    setIsMobileChatOpen(false);
-    setSelectedMobileItem(null);
-    setMobileChatType(null);
+    // Close mobile nav and show main chat
+    setMobileTab('projects'); // Reset to default tab
+    // The chat is always visible on mobile, just scroll to it or focus input
+    document.querySelector('.mobile-chat-input')?.focus();
   };
 
   const handleMessageMeClick = (): void => {
-    setMobileChatType('writeup');
-    setIsMobileChatOpen(true);
+    // Navigate to writeup page
+    setActiveTab('writeup');
+    setShowMobilePanel(true);
   };
+
+  const handleAnnouncementClick = (): void => {
+    // Navigate to announcement page
+    setActiveTab('announcement');
+    setShowMobilePanel(true);
+  };
+
+  // Filter mobile projects by search
+  // const filteredMobileProjects = projects.filter(project =>
+  //   project.name.toLowerCase().includes(mobileSearchQuery.toLowerCase()) ||
+  //   project.description.toLowerCase().includes(mobileSearchQuery.toLowerCase())
+  // );
 
   // Filter mobile projects by search
   const filteredMobileProjects = projects.filter(project =>
@@ -592,19 +603,72 @@ function App() {
         </div>
 
         {/* ==================== MOBILE LAYOUT ==================== */}
+{/* ==================== MOBILE LAYOUT ==================== */}
         <div className="mobile-layout">
           
-          {!isMobileChatOpen ? (
+          {/* Check if a desktop panel is active (mobile view of desktop component) */}
+          {showMobilePanel ? (
             <>
+              {/* Show the active desktop component in mobile fullscreen */}
+              <div className="mobile-panel-view">
+                {activeTab === 'projects' && (
+                  <ProjectsList 
+                    projects={projects} 
+                    onProjectClick={handleProjectClick}
+                    onClose={() => setShowMobilePanel(false)}
+                    isMobileActive={true}
+                  />
+                )}
+
+                {activeTab === 'contact' && (
+                  <ContactInfo 
+                    contacts={contactLinks}
+                    onClose={() => setShowMobilePanel(false)}
+                    isMobileActive={true}
+                  />
+                )}
+
+                {activeTab === 'collaborations' && (
+                  <Collaborations 
+                    collaborations={collaborations}
+                    onClose={() => setShowMobilePanel(false)}
+                    isMobileActive={true}
+                  />
+                )}
+
+                {activeTab === 'skills' && (
+                  <Skills 
+                    skills={skills}
+                    onClose={() => setShowMobilePanel(false)}
+                    isMobileActive={true}
+                  />
+                )}
+
+                {activeTab === 'announcement' && (
+                  <Announcement 
+                    onClose={() => setShowMobilePanel(false)}
+                    isMobileActive={true}
+                  />
+                )}
+
+                {activeTab === 'writeup' && (
+                  <Writeup 
+                    onClose={() => setShowMobilePanel(false)}
+                    isMobileActive={true}
+                  />
+                )}
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Main Mobile Home View */}
+              
               {/* Sticky Top Sections */}
               <div className="mobile-sticky-top">
                 <MobileAnnouncement
                   title="Portfolio Updates"
                   message="New projects and collaborations added! 🚀"
-                  onClick={() => {
-                    setMobileTab('projects');
-                    setActiveTab('announcement');
-                  }}
+                  onClick={handleAnnouncementClick}
                 />
                 
                 <MobileMessageMe
@@ -684,33 +748,57 @@ function App() {
                 )}
               </div>
 
+              {/* Main Chat Area - ALWAYS VISIBLE on mobile home */}
+              <div className="mobile-main-chat">
+                <div className="mobile-chat-header">
+                  <div className="mobile-chat-avatar">
+                    {userImage ? (
+                      <img src={userImage} alt="User" />
+                    ) : (
+                      <span>🤖</span>
+                    )}
+                  </div>
+                  <div className="mobile-chat-info">
+                    <h3>{botName}</h3>
+                    <p>online</p>
+                  </div>
+                  <button 
+                    className="mobile-theme-toggle"
+                    onClick={toggleTheme}
+                    aria-label="Toggle theme"
+                  >
+                    {theme === 'light' ? '🌙' : '☀️'}
+                  </button>
+                </div>
+
+                <div className="mobile-messages-container">
+                  {messages.map((message) => (
+                    <MessageBubble key={message.id} message={message} />
+                  ))}
+                  {isTyping && <TypingIndicator />}
+                  <div ref={messagesEndRef} />
+                </div>
+
+                <div className="mobile-chat-input-wrapper">
+                  <ChatInput
+                    onSendMessage={handleUserMessage}
+                    onImageUpload={handleImageUpload}
+                    disabled={currentState === STATES.ASK_IMAGE}
+                  />
+                </div>
+              </div>
+
               {/* Bottom Navigation */}
               <BottomNav
                 activeTab={mobileTab}
                 onTabChange={setMobileTab}
               />
 
-              {/* Floating Chat Button */}
+              {/* Floating Chat Button - Scrolls to chat */}
               <FloatingChatButton
                 onClick={handleFloatingChatClick}
               />
             </>
-          ) : (
-            /* Mobile Chat Page */
-            <MobileChatPage
-              item={selectedMobileItem}
-              chatType={mobileChatType}
-              onBack={handleMobileChatBack}
-              botName={botName}
-              userImage={userImage}
-              theme={theme}
-              onToggleTheme={toggleTheme}
-              messages={messages}
-              isTyping={isTyping}
-              onSendMessage={handleUserMessage}
-              onImageUpload={handleImageUpload}
-              currentState={currentState}
-            />
           )}
 
         </div>
@@ -720,3 +808,9 @@ function App() {
 }
 
 export default App;
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default App;
