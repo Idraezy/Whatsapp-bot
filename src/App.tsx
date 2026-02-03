@@ -59,13 +59,11 @@ function App() {
   const [showMobilePanel, setShowMobilePanel] = useState<boolean>(false);
 
   // Mobile state (NEW)
+  // Mobile state (UPDATED)
   const [mobileTab, setMobileTab] = useState<MobileTab>('projects');
-  const [isMobileChatOpen, setIsMobileChatOpen] = useState<boolean>(false);
-  const [selectedMobileItem, setSelectedMobileItem] = useState<any>(null);
-  const [mobileChatType, setMobileChatType] = useState<'project' | 'bot' | 'writeup' | null>(null);
-  const [showWriteupModal, setShowWriteupModal] = useState<boolean>(false);
+  const [showMobileChatPage, setShowMobileChatPage] = useState<boolean>(false); // For floating chat button
+  // const [showMobilePanel, setShowMobilePanel] = useState<boolean>(false); // For desktop components
   const [mobileSearchQuery, setMobileSearchQuery] = useState<string>('');
-
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Projects data
@@ -459,7 +457,7 @@ function App() {
   };
 
   // Mobile handlers (NEW)
-  // Mobile handlers (UPDATED - Navigate to existing desktop pages)
+  // Mobile handlers (CORRECTED)
   const handleMobileProjectClick = (project: any): void => {
     // Find and click the actual project in desktop component
     handleProjectClick(projects.find(p => p.id === project.id)!);
@@ -469,7 +467,7 @@ function App() {
   };
 
   const handleMobileContactClick = (contact: any): void => {
-    // Open contact link directly (no navigation needed for external links)
+    // Open contact link directly
     window.open(contact.url, '_blank');
   };
 
@@ -486,10 +484,13 @@ function App() {
   };
 
   const handleFloatingChatClick = (): void => {
-    // Close mobile nav and show main chat
-    setMobileTab('projects'); // Reset to default tab
-    // The chat is always visible on mobile, just scroll to it or focus input
-    document.querySelector('.mobile-chat-input')?.focus();
+    // Open fullscreen chat page
+    setShowMobileChatPage(true);
+  };
+
+  const handleMobileChatBack = (): void => {
+    // Close fullscreen chat page
+    setShowMobileChatPage(false);
   };
 
   const handleMessageMeClick = (): void => {
@@ -505,16 +506,11 @@ function App() {
   };
 
   // Filter mobile projects by search
-  // const filteredMobileProjects = projects.filter(project =>
-  //   project.name.toLowerCase().includes(mobileSearchQuery.toLowerCase()) ||
-  //   project.description.toLowerCase().includes(mobileSearchQuery.toLowerCase())
-  // );
-
-  // Filter mobile projects by search
   const filteredMobileProjects = projects.filter(project =>
     project.name.toLowerCase().includes(mobileSearchQuery.toLowerCase()) ||
     project.description.toLowerCase().includes(mobileSearchQuery.toLowerCase())
   );
+
 
   return (
     <div className="app-container">
@@ -606,64 +602,110 @@ function App() {
 {/* ==================== MOBILE LAYOUT ==================== */}
         <div className="mobile-layout">
           
-          {/* Check if a desktop panel is active (mobile view of desktop component) */}
-          {showMobilePanel ? (
-            <>
-              {/* Show the active desktop component in mobile fullscreen */}
-              <div className="mobile-panel-view">
-                {activeTab === 'projects' && (
-                  <ProjectsList 
-                    projects={projects} 
-                    onProjectClick={handleProjectClick}
-                    onClose={() => setShowMobilePanel(false)}
-                    isMobileActive={true}
-                  />
-                )}
-
-                {activeTab === 'contact' && (
-                  <ContactInfo 
-                    contacts={contactLinks}
-                    onClose={() => setShowMobilePanel(false)}
-                    isMobileActive={true}
-                  />
-                )}
-
-                {activeTab === 'collaborations' && (
-                  <Collaborations 
-                    collaborations={collaborations}
-                    onClose={() => setShowMobilePanel(false)}
-                    isMobileActive={true}
-                  />
-                )}
-
-                {activeTab === 'skills' && (
-                  <Skills 
-                    skills={skills}
-                    onClose={() => setShowMobilePanel(false)}
-                    isMobileActive={true}
-                  />
-                )}
-
-                {activeTab === 'announcement' && (
-                  <Announcement 
-                    onClose={() => setShowMobilePanel(false)}
-                    isMobileActive={true}
-                  />
-                )}
-
-                {activeTab === 'writeup' && (
-                  <Writeup 
-                    onClose={() => setShowMobilePanel(false)}
-                    isMobileActive={true}
-                  />
-                )}
+          {/* Fullscreen Chat Page (Only when FloatingChatButton is clicked) */}
+          {showMobileChatPage ? (
+            <div className="mobile-fullscreen-chat">
+              {/* Chat Header with Back Button */}
+              <div className="mobile-chat-header">
+                <button 
+                  className="mobile-chat-back-btn"
+                  onClick={handleMobileChatBack}
+                  aria-label="Back"
+                >
+                  ←
+                </button>
+                <div className="mobile-chat-avatar">
+                  {userImage ? (
+                    <img src={userImage} alt="User" />
+                  ) : (
+                    <span>🤖</span>
+                  )}
+                </div>
+                <div className="mobile-chat-info">
+                  <h3>{botName}</h3>
+                  <p>online</p>
+                </div>
+                <button 
+                  className="mobile-theme-toggle"
+                  onClick={toggleTheme}
+                  aria-label="Toggle theme"
+                >
+                  {theme === 'light' ? '🌙' : '☀️'}
+                </button>
               </div>
-            </>
+
+              {/* Chat Messages */}
+              <div className="mobile-fullscreen-messages">
+                {messages.map((message) => (
+                  <MessageBubble key={message.id} message={message} />
+                ))}
+                {isTyping && <TypingIndicator />}
+                <div ref={messagesEndRef} />
+              </div>
+
+              {/* Chat Input */}
+              <div className="mobile-fullscreen-input">
+                <ChatInput
+                  onSendMessage={handleUserMessage}
+                  onImageUpload={handleImageUpload}
+                  disabled={currentState === STATES.ASK_IMAGE}
+                />
+              </div>
+            </div>
+          ) : showMobilePanel ? (
+            /* Desktop Component View (When clicking on list items) */
+            <div className="mobile-panel-view">
+              {activeTab === 'projects' && (
+                <ProjectsList 
+                  projects={projects} 
+                  onProjectClick={handleProjectClick}
+                  onClose={() => setShowMobilePanel(false)}
+                  isMobileActive={true}
+                />
+              )}
+
+              {activeTab === 'contact' && (
+                <ContactInfo 
+                  contacts={contactLinks}
+                  onClose={() => setShowMobilePanel(false)}
+                  isMobileActive={true}
+                />
+              )}
+
+              {activeTab === 'collaborations' && (
+                <Collaborations 
+                  collaborations={collaborations}
+                  onClose={() => setShowMobilePanel(false)}
+                  isMobileActive={true}
+                />
+              )}
+
+              {activeTab === 'skills' && (
+                <Skills 
+                  skills={skills}
+                  onClose={() => setShowMobilePanel(false)}
+                  isMobileActive={true}
+                />
+              )}
+
+              {activeTab === 'announcement' && (
+                <Announcement 
+                  onClose={() => setShowMobilePanel(false)}
+                  isMobileActive={true}
+                />
+              )}
+
+              {activeTab === 'writeup' && (
+                <Writeup 
+                  onClose={() => setShowMobilePanel(false)}
+                  isMobileActive={true}
+                />
+              )}
+            </div>
           ) : (
+            /* Main Mobile Home View */
             <>
-              {/* Main Mobile Home View */}
-              
-              {/* Sticky Top Sections */}
+              {/* Sticky Top Sections - ALWAYS VISIBLE ON ALL TABS */}
               <div className="mobile-sticky-top">
                 <MobileAnnouncement
                   title="Portfolio Updates"
@@ -689,7 +731,7 @@ function App() {
                 </div>
               )}
 
-              {/* Tab Content Area */}
+              {/* Tab Content Area - Changes based on active bottom tab */}
               <div className="mobile-content-area">
                 {mobileTab === 'projects' && (
                   <MobileProjectsList
@@ -748,53 +790,13 @@ function App() {
                 )}
               </div>
 
-              {/* Main Chat Area - ALWAYS VISIBLE on mobile home */}
-              <div className="mobile-main-chat">
-                <div className="mobile-chat-header">
-                  <div className="mobile-chat-avatar">
-                    {userImage ? (
-                      <img src={userImage} alt="User" />
-                    ) : (
-                      <span>🤖</span>
-                    )}
-                  </div>
-                  <div className="mobile-chat-info">
-                    <h3>{botName}</h3>
-                    <p>online</p>
-                  </div>
-                  <button 
-                    className="mobile-theme-toggle"
-                    onClick={toggleTheme}
-                    aria-label="Toggle theme"
-                  >
-                    {theme === 'light' ? '🌙' : '☀️'}
-                  </button>
-                </div>
-
-                <div className="mobile-messages-container">
-                  {messages.map((message) => (
-                    <MessageBubble key={message.id} message={message} />
-                  ))}
-                  {isTyping && <TypingIndicator />}
-                  <div ref={messagesEndRef} />
-                </div>
-
-                <div className="mobile-chat-input-wrapper">
-                  <ChatInput
-                    onSendMessage={handleUserMessage}
-                    onImageUpload={handleImageUpload}
-                    disabled={currentState === STATES.ASK_IMAGE}
-                  />
-                </div>
-              </div>
-
               {/* Bottom Navigation */}
               <BottomNav
                 activeTab={mobileTab}
                 onTabChange={setMobileTab}
               />
 
-              {/* Floating Chat Button - Scrolls to chat */}
+              {/* Floating Chat Button */}
               <FloatingChatButton
                 onClick={handleFloatingChatClick}
               />

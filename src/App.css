@@ -131,13 +131,6 @@ body {
   display: none;
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 1024px) {
-  .whatsapp-layout {
-    max-width: 100%;
-  }
-}
-
 @media (max-width: 768px) {
   /* Hide desktop, show mobile */
   .desktop-layout {
@@ -150,17 +143,19 @@ body {
     width: 100%;
     height: 100vh;
     background: var(--app-bg);
+    overflow: hidden;
   }
 
-  /* Mobile sticky top section */
+  /* ==================== STICKY TOP SECTIONS ==================== */
   .mobile-sticky-top {
     position: sticky;
     top: 0;
     z-index: 100;
     background: var(--bot-bubble);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
-  /* Mobile search bar */
+  /* ==================== SEARCH BAR ==================== */
   .mobile-search-bar {
     padding: 8px 16px;
     background: var(--bot-bubble);
@@ -185,7 +180,7 @@ body {
     color: var(--text-tertiary);
   }
 
-  /* Mobile content area */
+  /* ==================== CONTENT AREA ==================== */
   .mobile-content-area {
     flex: 1;
     overflow-y: auto;
@@ -198,87 +193,7 @@ body {
     display: none;
   }
 
-  /* Panel mobile fixes */
-  .projects-panel,
-  .contact-panel,
-  .collaborations-panel,
-  .skills-panel,
-  .announcement-panel,
-  .writeup-panel {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: 900;
-    display: flex;
-    flex-direction: column;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    background: var(--bot-bubble);
-  }
-
-  .projects-panel.mobile-active,
-  .contact-panel.mobile-active,
-  .collaborations-panel.mobile-active,
-  .skills-panel.mobile-active,
-  .announcement-panel.mobile-active,
-  .writeup-panel.mobile-active {
-    transform: translateX(0);
-  }
-
-  .app-container {
-    padding: 0;
-  }
-
-  .whatsapp-layout {
-    max-width: 100%;
-    height: 100vh;
-    max-height: 100vh;
-    border-radius: 0;
-    position: relative;
-  }
-
-  .chat-wrapper {
-    width: 100%;
-    flex: 1;
-  }
-
-  .messages-container {
-    padding: 15px 5%;
-  }
-}
-
-@media (max-width: 480px) {
-  .messages-container {
-    padding: 10px 3%;
-  }
-
-  .mobile-search-bar {
-    padding: 6px 12px;
-  }
-
-  .mobile-search-input {
-    padding: 8px 12px;
-    font-size: 13px;
-  }
-}
-
-/* Desktop - expand to full width */
-@media (min-width: 1025px) {
-  .app-container {
-    padding: 0;
-  }
-
-  .whatsapp-layout {
-    width: 100vw;
-    height: 100vh;
-    max-width: 100vw;
-    max-height: 100vh;
-  }
-}
-/* ==================== MOBILE MAIN CHAT ==================== */
-@media (max-width: 768px) {
+  /* ==================== PANEL VIEW (Desktop components on mobile) ==================== */
   .mobile-panel-view {
     width: 100%;
     height: 100vh;
@@ -290,17 +205,30 @@ body {
     overflow-y: auto;
   }
 
-  .mobile-main-chat {
-    display: none; /* Hidden by default, shown when needed */
-    flex-direction: column;
-    height: auto;
-    background: var(--chat-bg);
-    border-top: 1px solid var(--border-color);
+  .mobile-panel-view .projects-panel,
+  .mobile-panel-view .contact-panel,
+  .mobile-panel-view .collaborations-panel,
+  .mobile-panel-view .skills-panel,
+  .mobile-panel-view .announcement-panel,
+  .mobile-panel-view .writeup-panel {
+    position: relative;
+    transform: translateX(0) !important;
+    z-index: auto;
+    width: 100%;
+    height: 100%;
   }
 
-  /* Show chat when floating button is clicked or on projects tab */
-  .mobile-layout:not(:has(.mobile-panel-view)) .mobile-main-chat {
+  /* ==================== FULLSCREEN CHAT PAGE ==================== */
+  .mobile-fullscreen-chat {
+    width: 100%;
+    height: 100vh;
     display: flex;
+    flex-direction: column;
+    background: var(--chat-bg);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1002;
   }
 
   .mobile-chat-header {
@@ -311,10 +239,32 @@ body {
     background: var(--header-bg);
     color: #FFFFFF;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
   }
 
-  [data-theme="dark"] .mobile-chat-header {
-    background: var(--header-bg);
+  [data-theme="light"] .mobile-chat-header {
+    color: #FFFFFF;
+  }
+
+  .mobile-chat-back-btn {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px;
+    margin-left: -8px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+
+  .mobile-chat-back-btn:active {
+    background: rgba(255, 255, 255, 0.1);
   }
 
   .mobile-chat-avatar {
@@ -374,7 +324,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
   }
 
-  .mobile-messages-container {
+  .mobile-fullscreen-messages {
     flex: 1;
     overflow-y: auto;
     padding: 16px;
@@ -387,11 +337,9 @@ body {
         rgba(0, 0, 0, 0.015) 10px,
         rgba(0, 0, 0, 0.015) 20px
       );
-    min-height: 300px;
-    max-height: 400px;
   }
 
-  [data-theme="dark"] .mobile-messages-container {
+  [data-theme="dark"] .mobile-fullscreen-messages {
     background-image: 
       repeating-linear-gradient(
         45deg,
@@ -402,30 +350,78 @@ body {
       );
   }
 
-  .mobile-messages-container::-webkit-scrollbar {
+  .mobile-fullscreen-messages::-webkit-scrollbar {
     width: 4px;
   }
 
-  .mobile-messages-container::-webkit-scrollbar-thumb {
+  .mobile-fullscreen-messages::-webkit-scrollbar-thumb {
     background: var(--text-tertiary);
     border-radius: 2px;
   }
 
-  .mobile-chat-input-wrapper {
-    padding: 8px;
+  .mobile-fullscreen-input {
+    padding: 0;
     background: var(--bot-bubble);
     border-top: 1px solid var(--border-color);
+    flex-shrink: 0;
   }
 
-  /* Make sure panels appear above everything when active */
-  .mobile-panel-view .projects-panel,
-  .mobile-panel-view .contact-panel,
-  .mobile-panel-view .collaborations-panel,
-  .mobile-panel-view .skills-panel,
-  .mobile-panel-view .announcement-panel,
-  .mobile-panel-view .writeup-panel {
-    position: relative;
-    transform: translateX(0) !important;
-    z-index: auto;
+  /* Panel fixes for mobile */
+  .projects-panel,
+  .contact-panel,
+  .collaborations-panel,
+  .skills-panel,
+  .announcement-panel,
+  .writeup-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 900;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    background: var(--bot-bubble);
+  }
+
+  .projects-panel.mobile-active,
+  .contact-panel.mobile-active,
+  .collaborations-panel.mobile-active,
+  .skills-panel.mobile-active,
+  .announcement-panel.mobile-active,
+  .writeup-panel.mobile-active {
+    transform: translateX(0);
+  }
+
+  .app-container {
+    padding: 0;
+  }
+
+  .whatsapp-layout {
+    max-width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .messages-container {
+    padding: 15px 5%;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-search-bar {
+    padding: 6px 12px;
+  }
+
+  .mobile-search-input {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .mobile-fullscreen-messages {
+    padding: 12px;
   }
 }
