@@ -1,0 +1,29 @@
+.floating-chat-button {
+  display: none; /* Hidden on desktop */
+}
+
+@media (max-width: 768px) {
+  .floating-chat-button {
+    display: flex;
+    position: fixed;
+    bottom: 80px; /* Above bottom nav */
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    background: #2563EB;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 16px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+    cursor: pointer;
+    z-index: 999;
+    transition: all 0.3s;
+  }
+
+  .floating-chat-button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+  }
+}

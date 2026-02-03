@@ -120,33 +120,72 @@ body {
   background: var(--text-secondary);
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 1024px) {
-  .whatsapp-layout {
-    max-width: 100%;
-  }
+/* Desktop layout */
+.desktop-layout {
+  display: flex;
+  width: 100%;
+  height: 100vh;
 }
 
+/* Mobile layout hidden on desktop */
+.mobile-layout {
+  display: none;
+}
+
+/* Mobile-specific styles */
 @media (max-width: 768px) {
-  .app-container {
-    padding: 0;
+  /* Hide desktop, show mobile */
+  .desktop-layout {
+    display: none;
   }
 
-  .whatsapp-layout {
-    max-width: 100%;
+  .mobile-layout {
+    display: flex;
+    flex-direction: column;
     height: 100vh;
-    max-height: 100vh;
-    border-radius: 0;
-    position: relative;
-  }
-
-  .chat-wrapper {
     width: 100%;
-    flex: 1;
   }
 
-  .messages-container {
-    padding: 15px 5%;
+  /* Sticky top section */
+  .mobile-sticky-top {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bot-bubble);
+  }
+
+  /* Search bar */
+  .mobile-search-bar {
+    padding: 8px 16px;
+    background: var(--bot-bubble);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .mobile-search-input {
+    width: 100%;
+    padding: 10px 16px;
+    background: var(--app-bg);
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    color: var(--text-primary);
+    outline: none;
+  }
+
+  /* Content area scrollable */
+  .mobile-content-area {
+    flex: 1;
+    overflow-y: auto;
+    background: var(--app-bg);
+    padding-bottom: 60px; /* Space for bottom nav */
+  }
+
+  /* Placeholder lists for calls, collaborations, tools */
+  .mobile-contacts-list,
+  .mobile-collaborations-list,
+  .mobile-tools-list {
+    display: flex;
+    flex-direction: column;
   }
 
   /* On mobile, panels are position:fixed overlays — remove them from flex flow entirely */
