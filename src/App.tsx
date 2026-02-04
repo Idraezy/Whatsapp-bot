@@ -39,6 +39,7 @@ import nft from './assets/nft.png';
 import cola from './assets/cola.png';
 import colaa from './assets/colaa.jpg';
 import colaaa from './assets/colaaa.jpg';
+import { Moon, Sun } from 'lucide-react';
 
 function App() {
   // Desktop state (existing)
@@ -599,7 +600,6 @@ function App() {
         </div>
 
         {/* ==================== MOBILE LAYOUT ==================== */}
-{/* ==================== MOBILE LAYOUT ==================== */}
         <div className="mobile-layout">
           
           {/* Fullscreen Chat Page (Only when FloatingChatButton is clicked) */}
@@ -630,7 +630,12 @@ function App() {
                   onClick={toggleTheme}
                   aria-label="Toggle theme"
                 >
-                  {theme === 'light' ? '🌙' : '☀️'}
+                  {theme === 'light' ? (
+                        <Moon size={20} strokeWidth={1.5} />
+                      ) : (
+                        <Sun size={20} strokeWidth={1.5} />
+                      )}
+                  {/* {theme === 'light' ? '🌙' : '☀️'} */}
                 </button>
               </div>
 
@@ -810,9 +815,3 @@ function App() {
 }
 
 export default App;
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default App;

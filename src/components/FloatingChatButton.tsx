@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageSquare } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import './FloatingChatButton.css';
 
 interface FloatingChatButtonProps {
@@ -8,8 +8,12 @@ interface FloatingChatButtonProps {
 
 const FloatingChatButton: React.FC<FloatingChatButtonProps> = ({ onClick }) => {
   return (
-    <button className="floating-chat-button" onClick={onClick} aria-label="Open chat">
-      <MessageSquare size={24} />
+    <button 
+      className="floating-chat-button" 
+      onClick={onClick} 
+      aria-label="Open chat"
+    >
+      <MessageCircle size={24} />
     </button>
   );
 };

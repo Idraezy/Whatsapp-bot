@@ -1,5 +1,5 @@
 .bottom-nav {
-  display: none; /* Hidden on desktop */
+  display: none;
 }
 
 @media (max-width: 768px) {
@@ -10,12 +10,13 @@
     left: 0;
     right: 0;
     height: 60px;
-    background: var(--bot-bubble);
-    border-top: 1px solid var(--border-color);
+    background: #1C2C33;
+    border-top: 1px solid rgba(0, 171, 136, 0.2);
     justify-content: space-around;
     align-items: center;
     z-index: 1000;
     padding: 0 8px;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
   }
 
   .bottom-nav-item {
@@ -26,17 +27,30 @@
     gap: 4px;
     background: none;
     border: none;
-    color: var(--text-secondary);
+    color: #8696A0;
     cursor: pointer;
     padding: 8px 12px;
     border-radius: 8px;
     transition: all 0.2s;
     flex: 1;
     max-width: 90px;
+    position: relative;
   }
 
   .bottom-nav-item.active {
-    color: #2563EB;
+    color: #00AB88;
+  }
+
+  .bottom-nav-item.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 3px;
+    background: #00AB88;
+    border-radius: 0 0 3px 3px;
   }
 
   .bottom-nav-item svg {
@@ -49,6 +63,6 @@
   }
 
   .bottom-nav-item:active {
-    background: rgba(37, 99, 235, 0.1);
+    background: rgba(0, 171, 136, 0.1);
   }
 }

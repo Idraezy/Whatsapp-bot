@@ -1,11 +1,12 @@
 .mobile-projects-list {
-  display: none; /* Hidden on desktop */
+  display: none;
 }
 
 @media (max-width: 768px) {
   .mobile-projects-list {
     display: flex;
     flex-direction: column;
+    background: #1C2C33;
   }
 
   .mobile-project-item {
@@ -13,14 +14,14 @@
     align-items: center;
     gap: 12px;
     padding: 12px 16px;
-    background: var(--bot-bubble);
-    border-bottom: 1px solid var(--border-color);
+    background: #1C2C33;
+    border-bottom: 1px solid #2A3942;
     cursor: pointer;
     transition: background 0.2s;
   }
 
   .mobile-project-item:active {
-    background: var(--app-bg);
+    background: #08141A;
   }
 
   .mobile-project-avatar {
@@ -29,6 +30,7 @@
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
+    background: #00AB88;
   }
 
   .mobile-project-avatar img {
@@ -53,7 +55,7 @@
     font-size: 16px;
     font-weight: 500;
     margin: 0;
-    color: var(--text-primary);
+    color: #E9EDEF;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -61,14 +63,14 @@
 
   .mobile-project-time {
     font-size: 12px;
-    color: var(--text-secondary);
+    color: #8696A0;
     flex-shrink: 0;
     margin-left: 8px;
   }
 
   .mobile-project-preview {
     font-size: 14px;
-    color: var(--text-secondary);
+    color: #8696A0;
     margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -76,7 +78,13 @@
   }
 
   .mobile-project-arrow {
-    color: var(--text-tertiary);
+    color: #667781;
     flex-shrink: 0;
+  }
+
+  .mobile-empty-state {
+    padding: 40px 20px;
+    text-align: center;
+    color: #8696A0;
   }
 }
