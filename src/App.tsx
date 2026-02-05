@@ -635,7 +635,7 @@ function App() {
                       ) : (
                         <Sun size={20} strokeWidth={1.5} />
                       )}
-                  {/* {theme === 'light' ? '🌙' : '☀️'} */}
+                
                 </button>
               </div>
 

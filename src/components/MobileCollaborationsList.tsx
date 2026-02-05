@@ -4,33 +4,53 @@ import './MobileCollaborationsList.css';
 
 export interface MobileCollaboration {
   id: string;
-  projectName: string;
-  collaborators: string;
-  icon: string;
+  name: string;
+  role: string;
+  period: string;
+  logo: string;
+  description?: string;
 }
 
 interface MobileCollaborationsListProps {
   collaborations: MobileCollaboration[];
-  onCollaborationClick: (collab: MobileCollaboration) => void;
+  onCollabClick: (collab: MobileCollaboration) => void;
 }
 
-const MobileCollaborationsList: React.FC<MobileCollaborationsListProps> = ({ collaborations, onCollaborationClick }) => {
+const MobileCollaborationsList: React.FC<MobileCollaborationsListProps> = ({ 
+  collaborations, 
+  onCollabClick 
+}) => {
   return (
     <div className="mobile-collaborations-list">
-      {collaborations.map(collab => (
+      {collaborations.map((collab) => (
         <div
           key={collab.id}
           className="mobile-collaboration-item"
-          onClick={() => onCollaborationClick(collab)}
+          onClick={() => onCollabClick(collab)}
         >
           <div className="mobile-collaboration-avatar">
-            <img src={collab.icon} alt={collab.projectName} />
+            {collab.logo ? (
+              <img 
+                src={collab.logo} 
+                alt={collab.name}
+                onError={(e) => {
+                  // Fallback if image fails to load
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.parentElement!.innerHTML = `<span style="font-size: 24px; color: #00AB88;">${collab.name.charAt(0)}</span>`;
+                }}
+              />
+            ) : (
+              <span style={{ fontSize: '24px', color: '#00AB88' }}>
+                {collab.name.charAt(0)}
+              </span>
+            )}
           </div>
           <div className="mobile-collaboration-content">
             <div className="mobile-collaboration-header">
-              <h3 className="mobile-collaboration-name">{collab.projectName}</h3>
+              <h3 className="mobile-collaboration-name">{collab.name}</h3>
+              <span className="mobile-collaboration-period">{collab.period}</span>
             </div>
-            <p className="mobile-collaboration-collaborators">{collab.collaborators}</p>
+            <p className="mobile-collaboration-role">{collab.role}</p>
           </div>
           <ChevronRight size={20} className="mobile-collaboration-arrow" />
         </div>
