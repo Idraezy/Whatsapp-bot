@@ -129,28 +129,34 @@
 }
 
 /* Mobile Responsiveness */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .chat-input-container {
-    padding: 8px 10px;
-    gap: 8px;
-    min-height: 56px;
-  }
-
-  .emoji-button,
-  .attachment-button,
-  .send-button,
-  .mic-button {
-    width: 36px;
-    height: 36px;
-    font-size: 22px;
+    display: flex !important;
+    background: #1C2C33;
+    padding: 10px 16px;
+    min-height: 62px;
   }
 
   .chat-input {
-    padding: 8px 10px;
-    font-size: 14px;
+    background: #2A3942;
+    color: #E9EDEF;
+    border: 1px solid #2A3942;
   }
 
-  .input-icons-left {
-    gap: 4px;
+  .chat-input::placeholder {
+    color: #667781;
+  }
+
+  .emoji-button,
+  .attachment-button {
+    color: #8696A0;
+  }
+
+  .send-button {
+    background: #00AB88;
+  }
+
+  .mic-button {
+    color: #8696A0;
   }
 }
