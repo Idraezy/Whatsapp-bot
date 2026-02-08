@@ -600,6 +600,7 @@ function App() {
         </div>
 
         {/* ==================== MOBILE LAYOUT ==================== */}
+       {/* ==================== MOBILE LAYOUT ==================== */}
         <div className="mobile-layout">
           
           {/* Fullscreen Chat Page (Only when FloatingChatButton is clicked) */}
@@ -612,7 +613,7 @@ function App() {
                   onClick={handleMobileChatBack}
                   aria-label="Back"
                 >
-                  ←
+                  ← Back
                 </button>
                 <div className="mobile-chat-avatar">
                   {userImage ? (
@@ -635,7 +636,6 @@ function App() {
                       ) : (
                         <Sun size={20} strokeWidth={1.5} />
                       )}
-                
                 </button>
               </div>
 
@@ -648,7 +648,7 @@ function App() {
                 <div ref={messagesEndRef} />
               </div>
 
-              {/* Chat Input */}
+              {/* Chat Input - THIS IS THE KEY PART */}
               <div className="mobile-fullscreen-input">
                 <ChatInput
                   onSendMessage={handleUserMessage}

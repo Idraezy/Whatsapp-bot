@@ -127,6 +127,11 @@ body {
 }
 
 /* ==================== MOBILE LAYOUT ==================== */
+/* ==================== MOBILE LAYOUT ==================== */
+.mobile-layout {
+  display: none;
+}
+
 @media (max-width: 768px) {
   /* Hide desktop, show mobile */
   .desktop-layout {
@@ -160,7 +165,7 @@ body {
     background: #1C2C33;
     border-bottom: 1px solid #2A3942;
     position: sticky;
-    top: 104px; /* Below announcements + message me */
+    top: 104px;
     z-index: 99;
   }
 
@@ -179,14 +184,14 @@ body {
     color: #667781;
   }
 
-  /* ==================== CONTENT AREA - FIXED SCROLLING ==================== */
+  /* ==================== CONTENT AREA ==================== */
   .mobile-content-area {
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
     background: #0B141A;
-    padding-bottom: 80px; /* Extra space for bottom nav + breathing room */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    padding-bottom: 80px;
+    -webkit-overflow-scrolling: touch;
     position: relative;
   }
 
@@ -203,7 +208,7 @@ body {
     border-radius: 2px;
   }
 
-  /* ==================== PANEL VIEW (Desktop components on mobile) ==================== */
+  /* ==================== PANEL VIEW ==================== */
   .mobile-panel-view {
     width: 100%;
     height: 100vh;
@@ -228,7 +233,7 @@ body {
     height: 100%;
   }
 
-  /* ==================== FULLSCREEN CHAT PAGE ==================== */
+  /* ==================== FULLSCREEN CHAT ==================== */
   .mobile-fullscreen-chat {
     width: 100%;
     height: 100vh;
@@ -259,14 +264,14 @@ body {
     border: none;
     color: inherit;
     cursor: pointer;
-    padding: 8px;
-    margin-left: -8px;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    padding: 8px 12px;
+    margin-left: -12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 4px;
     transition: background 0.2s;
   }
 
@@ -360,15 +365,12 @@ body {
   }
 
   .mobile-fullscreen-input {
-    padding: 0;
+    flex-shrink: 0;
     background: #1C2C33;
     border-top: 1px solid #2A3942;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 10;
   }
 
-  /* Panel fixes for mobile */
+  /* Panel fixes */
   .projects-panel,
   .contact-panel,
   .collaborations-panel,
@@ -428,6 +430,6 @@ body {
   }
 
   .mobile-content-area {
-    padding-bottom: 90px; /* More space on smaller screens */
+    padding-bottom: 90px;
   }
 }
