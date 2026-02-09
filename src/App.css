@@ -233,6 +233,9 @@ body {
     height: 100%;
   }
 
+  @media (max-width: 768px) {
+  /* ... your existing mobile styles ... */
+
   /* ==================== FULLSCREEN CHAT ==================== */
   .mobile-fullscreen-chat {
     width: 100%;
@@ -343,6 +346,7 @@ body {
     overflow-y: auto;
     overflow-x: hidden;
     padding: 16px;
+    padding-bottom: 20px; /* Extra space at bottom */
     background-color: #0B141A;
     background-image: 
       repeating-linear-gradient(
@@ -364,72 +368,39 @@ body {
     border-radius: 2px;
   }
 
+  /* THIS IS THE KEY FIX - Make sure chat input is visible and at bottom */
   .mobile-fullscreen-input {
     flex-shrink: 0;
     background: #1C2C33;
     border-top: 1px solid #2A3942;
-  }
-
-  /* Panel fixes */
-  .projects-panel,
-  .contact-panel,
-  .collaborations-panel,
-  .skills-panel,
-  .announcement-panel,
-  .writeup-panel {
-    position: fixed;
-    top: 0;
-    left: 0;
+    position: sticky;
+    bottom: 0;
     width: 100%;
-    height: 100vh;
-    z-index: 900;
-    display: flex;
-    flex-direction: column;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    background: #1C2C33;
+    z-index: 10;
   }
 
-  .projects-panel.mobile-active,
-  .contact-panel.mobile-active,
-  .collaborations-panel.mobile-active,
-  .skills-panel.mobile-active,
-  .announcement-panel.mobile-active,
-  .writeup-panel.mobile-active {
-    transform: translateX(0);
+  /* Ensure ChatInput displays properly on mobile chat page */
+  .mobile-fullscreen-input .chat-input-container {
+    display: flex !important;
+    background: #1C2C33 !important;
+    border-top: none;
   }
 
-  .app-container {
-    padding: 0;
+  .mobile-fullscreen-input .chat-input {
+    background: #2A3942 !important;
+    color: #E9EDEF !important;
+    border-color: #2A3942 !important;
   }
 
-  .whatsapp-layout {
-    max-width: 100%;
-    height: 100vh;
-    max-height: 100vh;
-    border-radius: 0;
+  .mobile-fullscreen-input .emoji-button,
+  .mobile-fullscreen-input .attachment-button,
+  .mobile-fullscreen-input .mic-button {
+    color: #8696A0 !important;
   }
 
-  .messages-container {
-    padding: 15px 5%;
-  }
-}
-
-@media (max-width: 480px) {
-  .mobile-search-bar {
-    padding: 6px 12px;
+  .mobile-fullscreen-input .send-button {
+    background: #00AB88 !important;
   }
 
-  .mobile-search-input {
-    padding: 8px 12px;
-    font-size: 13px;
-  }
-
-  .mobile-fullscreen-messages {
-    padding: 12px;
-  }
-
-  .mobile-content-area {
-    padding-bottom: 90px;
-  }
+  /* ... rest of your mobile styles ... */
 }
