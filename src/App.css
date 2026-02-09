@@ -234,7 +234,7 @@ body {
   }
 
   /* ==================== FULLSCREEN CHAT ==================== */
-@media (max-width: 768px) {
+
   /* ... your existing mobile styles ... */
 
   /* ==================== FULLSCREEN CHAT ==================== */
@@ -449,7 +449,7 @@ body {
   .messages-container {
     padding: 15px 5%;
   }
-}
+
 
 @media (max-width: 480px) {
   .mobile-search-bar {
