@@ -63,6 +63,8 @@ function App() {
   // Mobile state (UPDATED)
   const [mobileTab, setMobileTab] = useState<MobileTab>('projects');
   const [showMobileChatPage, setShowMobileChatPage] = useState<boolean>(false); // For floating chat button
+  const [showMobileChatInput, setShowMobileChatInput] = useState<boolean>(false);
+
   // const [showMobilePanel, setShowMobilePanel] = useState<boolean>(false); // For desktop components
   const [mobileSearchQuery, setMobileSearchQuery] = useState<string>('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -485,9 +487,9 @@ function App() {
   };
 
   const handleFloatingChatClick = (): void => {
-    // Open fullscreen chat page
-    setShowMobileChatPage(true);
-  };
+  setShowMobileChatInput(!showMobileChatInput);
+};
+
 
   const handleMobileChatBack = (): void => {
     // Close fullscreen chat page
