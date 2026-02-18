@@ -7,14 +7,25 @@ export type MobileTab = 'projects' | 'calls' | 'collaborations' | 'tools';
 interface BottomNavProps {
   activeTab: MobileTab;
   onTabChange: (tab: MobileTab) => void;
+  projectCount?: number;
+  contactCount?: number;
+  collabCount?: number;
+  toolCount?: number;
 }
 
-const BottomNav: React.FC<BottomNavProps> = ({ activeTab, onTabChange }) => {
+const BottomNav: React.FC<BottomNavProps> = ({ 
+  activeTab, 
+  onTabChange,
+  projectCount = 0,
+  contactCount = 0,
+  collabCount = 0,
+  toolCount = 0
+}) => {
   const tabs = [
-    { id: 'projects' as MobileTab, label: 'Projects', icon: Laptop },
-    { id: 'calls' as MobileTab, label: 'Calls', icon: Phone },
-    { id: 'collaborations' as MobileTab, label: 'Collaborations', icon: Users },
-    { id: 'tools' as MobileTab, label: 'Tools', icon: ShieldCheck },
+    { id: 'projects' as MobileTab, label: 'Projects', icon: Laptop, count: projectCount },
+    { id: 'calls' as MobileTab, label: 'Calls', icon: Phone, count: contactCount },
+    { id: 'collaborations' as MobileTab, label: 'Collaborations', icon: Users, count: collabCount },
+    { id: 'tools' as MobileTab, label: 'Tools', icon: ShieldCheck, count: toolCount },
   ];
 
   return (
@@ -30,7 +41,12 @@ const BottomNav: React.FC<BottomNavProps> = ({ activeTab, onTabChange }) => {
             onClick={() => onTabChange(tab.id)}
             aria-label={tab.label}
           >
-            <Icon size={24} strokeWidth={isActive ? 2.5 : 2} />
+            <div className="bottom-nav-icon-wrapper">
+              <Icon size={24} strokeWidth={isActive ? 2.5 : 2} />
+              {tab.count > 0 && (
+                <span className="bottom-nav-badge">{tab.count}</span>
+              )}
+            </div>
             <span className="bottom-nav-label">{tab.label}</span>
           </button>
         );

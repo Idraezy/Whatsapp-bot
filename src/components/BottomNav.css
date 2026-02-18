@@ -1,3 +1,7 @@
+.bottom-nav {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .bottom-nav {
     display: flex;
@@ -49,8 +53,33 @@
     border-radius: 0 0 3px 3px;
   }
 
-  .bottom-nav-item svg {
+  .bottom-nav-icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bottom-nav-icon-wrapper svg {
     color: currentColor;
+  }
+
+  .bottom-nav-badge {
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    background: #00AB88;
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: 600;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+    box-shadow: 0 2px 4px rgba(0, 171, 136, 0.4);
   }
 
   .bottom-nav-label {
