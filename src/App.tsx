@@ -797,10 +797,67 @@ function App() {
                 )}
               </div>
 
+
+{showMobileChatInput && (
+                <div className="mobile-chat-popup">
+                  <div className="mobile-chat-popup-header">
+                    <div className="mobile-chat-popup-info">
+                      <div className="mobile-chat-popup-avatar">
+                        {userImage ? (
+                          <img src={userImage} alt="Bot" />
+                        ) : (
+                          <span>🤖</span>
+                        )}
+                      </div>
+                      <div>
+                        <h4>{botName}</h4>
+                        <p>online</p>
+                      </div>
+                    </div>
+                    <div className="mobile-chat-popup-actions">
+                      <button 
+                        className="mobile-chat-expand-btn"
+                        onClick={handleOpenFullscreenChat}
+                        aria-label="Expand chat"
+                      >
+                        ⛶
+                      </button>
+                      <button 
+                        className="mobile-chat-close-btn"
+                        onClick={() => setShowMobileChatInput(false)}
+                        aria-label="Close chat"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div className="mobile-chat-popup-messages">
+                    {messages.slice(-3).map((message) => (
+                      <MessageBubble key={message.id} message={message} />
+                    ))}
+                    {isTyping && <TypingIndicator />}
+                    <div ref={messagesEndRef} />
+                  </div>
+                  
+                  <div className="mobile-chat-popup-input">
+                    <ChatInput
+                      onSendMessage={handleUserMessage}
+                      onImageUpload={handleImageUpload}
+                      disabled={currentState === STATES.ASK_IMAGE}
+                    />
+                  </div>
+                </div>
+              )}
+
               {/* Bottom Navigation */}
               <BottomNav
                 activeTab={mobileTab}
                 onTabChange={setMobileTab}
+                projectCount={projects.length}
+                contactCount={contactLinks.length}
+                collabCount={collaborations.length}
+                toolCount={skills.length}
               />
 
               {/* Floating Chat Button */}
