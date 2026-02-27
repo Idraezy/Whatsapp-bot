@@ -15,7 +15,7 @@ import TypingIndicator from './components/TypingIndicator';
 import ChatInput from './components/ChatInput';
 import { Message, STATES, StateType } from './types';
 
-// Mobile components (NEW)
+// Mobile components
 import BottomNav, { MobileTab } from './components/BottomNav';
 import MobileAnnouncement from './components/MobileAnnouncement';
 import MobileMessageMe from './components/MobileMessageMe';
@@ -24,7 +24,6 @@ import MobileProjectsList from './components/MobileProjectsList';
 import MobileContactsList from './components/MobileContactsList';
 import MobileCollaborationsList from './components/MobileCollaborationsList';
 import MobileToolsList from './components/MobileToolsList';
-import MobileChatPage from './components/MobileChatPage';
 
 // Import project images
 import logo from './assets/logo.png';
@@ -39,10 +38,9 @@ import nft from './assets/nft.png';
 import cola from './assets/cola.png';
 import colaa from './assets/colaa.jpg';
 import colaaa from './assets/colaaa.jpg';
-import { Moon, Sun } from 'lucide-react';
 
 function App() {
-  // Desktop state (existing)
+  // Desktop state
   const [messages, setMessages] = useState<Message[]>([]);
   const [currentState, setCurrentState] = useState<StateType>(STATES.ASK_NAME);
   const [userName, setUserName] = useState<string>('');
@@ -59,14 +57,12 @@ function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [showMobilePanel, setShowMobilePanel] = useState<boolean>(false);
 
-  // Mobile state (NEW)
-  // Mobile state (UPDATED)
+  // Mobile state
   const [mobileTab, setMobileTab] = useState<MobileTab>('projects');
-  const [showMobileChatPage, setShowMobileChatPage] = useState<boolean>(false); // For floating chat button
+  const [showMobileChatPage, setShowMobileChatPage] = useState<boolean>(false);
   const [showMobileChatInput, setShowMobileChatInput] = useState<boolean>(false);
-
-  // const [showMobilePanel, setShowMobilePanel] = useState<boolean>(false); // For desktop components
   const [mobileSearchQuery, setMobileSearchQuery] = useState<string>('');
+  
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Projects data
@@ -459,51 +455,46 @@ function App() {
     addBotMessage(errorMessage, 800);
   };
 
-  // Mobile handlers (NEW)
-  // Mobile handlers (CORRECTED)
+  // Mobile handlers
   const handleMobileProjectClick = (project: any): void => {
-    // Find and click the actual project in desktop component
     handleProjectClick(projects.find(p => p.id === project.id)!);
-    // Switch to projects view
     setActiveTab('projects');
     setShowMobilePanel(true);
   };
 
   const handleMobileContactClick = (contact: any): void => {
-    // Open contact link directly
     window.open(contact.url, '_blank');
   };
 
   const handleMobileCollabClick = (collab: any): void => {
-    // Switch to collaborations view
     setActiveTab('collaborations');
     setShowMobilePanel(true);
   };
 
   const handleMobileToolClick = (skill: any): void => {
-    // Switch to skills view
     setActiveTab('skills');
     setShowMobilePanel(true);
   };
 
   const handleFloatingChatClick = (): void => {
-  setShowMobileChatInput(!showMobileChatInput);
-};
+    setShowMobileChatInput(prev => !prev);
+  };
 
+  const handleOpenFullscreenChat = (): void => {
+    setShowMobileChatPage(true);
+    setShowMobileChatInput(false);
+  };
 
   const handleMobileChatBack = (): void => {
-    // Close fullscreen chat page
     setShowMobileChatPage(false);
   };
 
   const handleMessageMeClick = (): void => {
-    // Navigate to writeup page
     setActiveTab('writeup');
     setShowMobilePanel(true);
   };
 
   const handleAnnouncementClick = (): void => {
-    // Navigate to announcement page
     setActiveTab('announcement');
     setShowMobilePanel(true);
   };
@@ -513,7 +504,6 @@ function App() {
     project.name.toLowerCase().includes(mobileSearchQuery.toLowerCase()) ||
     project.description.toLowerCase().includes(mobileSearchQuery.toLowerCase())
   );
-
 
   return (
     <div className="app-container">
@@ -602,13 +592,11 @@ function App() {
         </div>
 
         {/* ==================== MOBILE LAYOUT ==================== */}
-       {/* ==================== MOBILE LAYOUT ==================== */}
         <div className="mobile-layout">
           
-          {/* Fullscreen Chat Page (Only when FloatingChatButton is clicked) */}
+          {/* Fullscreen Chat Page */}
           {showMobileChatPage ? (
             <div className="mobile-fullscreen-chat">
-              {/* Chat Header with Back Button */}
               <div className="mobile-chat-header">
                 <button 
                   className="mobile-chat-back-btn"
@@ -633,15 +621,10 @@ function App() {
                   onClick={toggleTheme}
                   aria-label="Toggle theme"
                 >
-                  {theme === 'light' ? (
-                        <Moon size={20} strokeWidth={1.5} />
-                      ) : (
-                        <Sun size={20} strokeWidth={1.5} />
-                      )}
+                  {theme === 'light' ? '🌙' : '☀️'}
                 </button>
               </div>
 
-              {/* Chat Messages */}
               <div className="mobile-fullscreen-messages">
                 {messages.map((message) => (
                   <MessageBubble key={message.id} message={message} />
@@ -650,7 +633,6 @@ function App() {
                 <div ref={messagesEndRef} />
               </div>
 
-              {/* Chat Input - THIS IS THE KEY PART */}
               <div className="mobile-fullscreen-input">
                 <ChatInput
                   onSendMessage={handleUserMessage}
@@ -660,7 +642,7 @@ function App() {
               </div>
             </div>
           ) : showMobilePanel ? (
-            /* Desktop Component View (When clicking on list items) */
+            /* Desktop Component View */
             <div className="mobile-panel-view">
               {activeTab === 'projects' && (
                 <ProjectsList 
@@ -712,7 +694,6 @@ function App() {
           ) : (
             /* Main Mobile Home View */
             <>
-              {/* Sticky Top Sections - ALWAYS VISIBLE ON ALL TABS */}
               <div className="mobile-sticky-top">
                 <MobileAnnouncement
                   title="Portfolio Updates"
@@ -725,7 +706,6 @@ function App() {
                 />
               </div>
 
-              {/* Conditional Search Bar (only on Projects tab) */}
               {mobileTab === 'projects' && (
                 <div className="mobile-search-bar">
                   <input 
@@ -738,7 +718,6 @@ function App() {
                 </div>
               )}
 
-              {/* Tab Content Area - Changes based on active bottom tab */}
               <div className="mobile-content-area">
                 {mobileTab === 'projects' && (
                   <MobileProjectsList
@@ -762,8 +741,7 @@ function App() {
                       icon: c.icon,
                       bgColor: c.bgColor,
                       url: c.url,
-                      type: c.type,
-                      timestamp: 'Available'
+                      type: c.type
                     }))}
                     onContactClick={handleMobileContactClick}
                   />
@@ -797,8 +775,8 @@ function App() {
                 )}
               </div>
 
-
-{showMobileChatInput && (
+              {/* Mobile Chat Input Popup */}
+              {showMobileChatInput && (
                 <div className="mobile-chat-popup">
                   <div className="mobile-chat-popup-header">
                     <div className="mobile-chat-popup-info">
@@ -819,6 +797,7 @@ function App() {
                         className="mobile-chat-expand-btn"
                         onClick={handleOpenFullscreenChat}
                         aria-label="Expand chat"
+                        title="Expand to fullscreen"
                       >
                         ⛶
                       </button>
@@ -837,7 +816,6 @@ function App() {
                       <MessageBubble key={message.id} message={message} />
                     ))}
                     {isTyping && <TypingIndicator />}
-                    <div ref={messagesEndRef} />
                   </div>
                   
                   <div className="mobile-chat-popup-input">
@@ -850,17 +828,15 @@ function App() {
                 </div>
               )}
 
-              {/* Bottom Navigation */}
               <BottomNav
                 activeTab={mobileTab}
                 onTabChange={setMobileTab}
                 projectCount={projects.length}
-                contactCount={contactLinks.length}
-                collabCount={collaborations.length}
-                toolCount={skills.length}
+                contactCount={0}
+                collabCount={0}
+                toolCount={0}
               />
 
-              {/* Floating Chat Button */}
               <FloatingChatButton
                 onClick={handleFloatingChatClick}
               />
