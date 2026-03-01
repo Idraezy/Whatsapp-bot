@@ -24,20 +24,21 @@ import MobileProjectsList from './components/MobileProjectsList';
 import MobileContactsList from './components/MobileContactsList';
 import MobileCollaborationsList from './components/MobileCollaborationsList';
 import MobileToolsList from './components/MobileToolsList';
+import {Moon, Sun} from 'lucide-react';
 
 // Import project images
-import logo from './assets/logo.png';
-import logoo from './assets/logoo.jpeg';
-import logooo from './assets/logooo.png';
-import logoooo from './assets/logoooo.jpeg';
-import logooooo from './assets/logooooo.jpeg';
-import prof from './assets/prof.jpg';
-import nft from './assets/nft.png';
+import daliWearLogo from './assets/dali-wear-logo.png';
+import atsCheckerLogo from './assets/ats-checker-logo.jpeg';
+import landingPageLogo from './assets/landing-page-logo.png';
+import smartInvoiceLogo from './assets/smart-invoice-logo.jpeg';
+import clientPilotLogo from './assets/client-pilot-logo.jpeg';
+import profileImage from './assets/profile-image.jpg';
+import nftMarketplaceLogo from './assets/nft-marketplace-logo.png';
 
 // Import collaboration company logos
-import cola from './assets/cola.png';
-import colaa from './assets/colaa.jpg';
-import colaaa from './assets/colaaa.jpg';
+import chaindustryLogo from './assets/chaindustry-logo.png';
+import flexisafLogo from './assets/flexisaf-logo.jpg';
+import hngLogo from './assets/hng-logo.jpg';
 
 function App() {
   // Desktop state
@@ -73,7 +74,7 @@ function App() {
       description:
         "A modern e-commerce platform for fashion and lifestyle products, featuring clothing items and Pinterest frames. Built for elegant design, smooth animations, and a seamless user experience with React, TypeScript, Tailwind CSS, Framer Motion, React Router DOM, and Lucide React.",
       link: "https://dali-m2rk.vercel.app/",
-      icon: logo,
+      icon: daliWearLogo,
     },
     {
       id: '2',
@@ -81,7 +82,7 @@ function App() {
       description:
         "A frontend application that analyzes resumes against job descriptions and provides intelligent ATS-based suggestions using React, TypeScript, Tailwind CSS, Framer Motion, and LocalStorage.",
       link: "https://at-sify.vercel.app/",
-      icon: logoo,
+      icon: atsCheckerLogo,
     },
     {
       id: '3',
@@ -89,7 +90,7 @@ function App() {
       description:
         "An AI-powered landing page generator with real-time preview and customizable themes built using React, TypeScript, Tailwind CSS, Framer Motion, and Figma.",
       link: "https://landing-page-generator-taupe.vercel.app/",
-      icon: logooo,
+      icon: landingPageLogo,
     },
     {
       id: '4',
@@ -97,7 +98,7 @@ function App() {
       description:
         "A web application for creating, managing, and exporting professional invoices, built with Next.js, React, Tailwind CSS, and JavaScript.",
       link: "https://smart-invoice-eta.vercel.app/",
-      icon: logoooo,
+      icon: smartInvoiceLogo,
     },
     {
       id: '5',
@@ -105,14 +106,14 @@ function App() {
       description:
         "A lightweight client management dashboard for freelancers and small businesses to track clients, statuses, and notes in one place using React, TypeScript, Tailwind CSS, and Framer Motion.",
       link: "https://client-pilot-mini-app.vercel.app/",
-      icon: logooooo,
+      icon: clientPilotLogo,
     },
     {
       id: '6',
       name: "Portfolio Website",
       description: "My Personal portfolio with modern designs and smooth animations built using React, TypeScript, Tailwind CSS, Framer Motion, and Figma.",
       link: "https://idaraetim-portfolio.vercel.app/",
-      icon: prof,
+      icon: profileImage,
     },
     {
       id: '7',
@@ -120,7 +121,7 @@ function App() {
       description:
         "A decentralized marketplace for trading NFTs with wallet connectivity and smart contract integration built using React, TypeScript, Tailwind CSS, Solidity, Framer Motion, and designed in Figma.",
       link: "https://nft-marketplace-22.vercel.app/",
-      icon: nft,
+      icon: nftMarketplaceLogo,
     },
   ];
 
@@ -202,7 +203,7 @@ function App() {
       role: 'Frontend Developer',
       period: '2023 - Present',
       description: 'Worked on real-world frontend projects in a collaborative development environment.',
-      logo: cola,
+      logo: chaindustryLogo,
     },
     {
       id: '2',
@@ -210,7 +211,7 @@ function App() {
       role: 'Frontend Developer (Internship)',
       period: '2024 - 2025',
       description: 'Participated in an intensive internship focused on building production-ready frontend applications.',
-      logo: colaaa,
+      logo: hngLogo,
     },
     {
       id: '3',
@@ -218,7 +219,7 @@ function App() {
       role: 'Senior Frontend Developer',
       period: '2025 - Present',
       description: 'Building modern, responsive, and animated web interfaces using React.js, TypeScript, Tailwind CSS, and Framer Motion with strong focus on UX and performance.',
-      logo: colaa,
+      logo: flexisafLogo,
     },
     {
       id: '4',
@@ -226,7 +227,7 @@ function App() {
       role: 'Full Stack Developer',
       period: '2024 - Present',
       description: 'Building modern, responsive, and animated web interfaces using React.js, TypeScript, Tailwind CSS, and Framer Motion with strong focus on UX and performance.',
-      logo: logo,
+      logo: profileImage,
     },
   ];
 
@@ -621,7 +622,11 @@ function App() {
                   onClick={toggleTheme}
                   aria-label="Toggle theme"
                 >
-                  {theme === 'light' ? '🌙' : '☀️'}
+                  {theme === 'light' ? (
+                        <Moon size={20} strokeWidth={1.5} color='white'/>
+                      ) : (
+                        <Sun size={20} strokeWidth={1.5} color='white'/>
+                      )}
                 </button>
               </div>
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { Laptop, PhoneIcon, Settings, ShieldCheck, Minus, Megaphone, MessageSquareText } from 'lucide-react';
 import './Sidebar.css';
 import { People } from 'iconsax-react';
+import profileImage from '../assets/profile-image.jpg';
 
 interface SidebarProps {
   activeTab: 'projects' | 'contact' | 'collaborations' | 'skills' | 'announcement' | 'writeup';
@@ -36,7 +37,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       <div className={`sidebar ${isOpen ? 'sidebar-open' : ''}`}>
         <div className="sidebar-header">
           <div className="sidebar-avatar">
-            <span>💼</span>
+            <img src={profileImage} alt="Profile Image"  height={40} width={40} style={{borderRadius: '50%'}} />
           </div>
         </div>
 
