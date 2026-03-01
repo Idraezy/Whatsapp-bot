@@ -227,7 +227,7 @@ function App() {
       role: 'Full Stack Developer',
       period: '2024 - Present',
       description: 'Building modern, responsive, and animated web interfaces using React.js, TypeScript, Tailwind CSS, and Framer Motion with strong focus on UX and performance.',
-      logo: profileImage,
+      logo: daliWearLogo,
     },
   ];
 

@@ -135,12 +135,25 @@
     background: #1C2C33;
     padding: 10px 16px;
     min-height: 62px;
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
+  .input-icons-left {
+    display: flex !important;
+  }
+
+  .emoji-button,
+  .attachment-button {
+    display: flex !important;
   }
 
   .chat-input {
     background: #2A3942;
     color: #E9EDEF;
     border: 1px solid #2A3942;
+    display: block !important;
+    flex: 1;
   }
 
   .chat-input::placeholder {
@@ -154,9 +167,11 @@
 
   .send-button {
     background: #00AB88;
+    display: flex !important;
   }
 
   .mic-button {
     color: #8696A0;
+    display: flex !important;
   }
 }
